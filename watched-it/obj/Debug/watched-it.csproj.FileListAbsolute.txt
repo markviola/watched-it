@@ -1,0 +1,9 @@
+C:\Users\Mark\Desktop\Projects\watched-it\watched-it\bin\Debug\watched-it.exe.config
+C:\Users\Mark\Desktop\Projects\watched-it\watched-it\bin\Debug\watched-it.exe
+C:\Users\Mark\Desktop\Projects\watched-it\watched-it\bin\Debug\watched-it.pdb
+C:\Users\Mark\Desktop\Projects\watched-it\watched-it\obj\Debug\watched-it.csprojResolveAssemblyReference.cache
+C:\Users\Mark\Desktop\Projects\watched-it\watched-it\obj\Debug\watched_it.Properties.Resources.resources
+C:\Users\Mark\Desktop\Projects\watched-it\watched-it\obj\Debug\watched-it.csproj.GenerateResource.Cache
+C:\Users\Mark\Desktop\Projects\watched-it\watched-it\obj\Debug\watched-it.exe
+C:\Users\Mark\Desktop\Projects\watched-it\watched-it\obj\Debug\watched-it.pdb
+C:\Users\Mark\Desktop\Projects\watched-it\watched-it\obj\Debug\watched_it.WatchedIt.resources
