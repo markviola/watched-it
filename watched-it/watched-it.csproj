@@ -47,6 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MovieDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MovieDB.xsd</DependentUpon>
+    </Compile>
     <Compile Include="WatchedIt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +74,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="MovieDB.xsc">
+      <DependentUpon>MovieDB.xsd</DependentUpon>
+    </None>
+    <None Include="MovieDB.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MovieDB.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="MovieDB.xss">
+      <DependentUpon>MovieDB.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

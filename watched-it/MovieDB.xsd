@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MovieDB" targetNamespace="http://tempuri.org/MovieDB.xsd" xmlns:mstns="http://tempuri.org/MovieDB.xsd" xmlns="http://tempuri.org/MovieDB.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="MovieDB" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="MovieDB" msprop:Generator_UserDSName="MovieDB">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Movies" msprop:Generator_TableClassName="MoviesDataTable" msprop:Generator_TableVarName="tableMovies" msprop:Generator_RowChangedName="MoviesRowChanged" msprop:Generator_TablePropName="Movies" msprop:Generator_RowDeletingName="MoviesRowDeleting" msprop:Generator_RowChangingName="MoviesRowChanging" msprop:Generator_RowEvHandlerName="MoviesRowChangeEventHandler" msprop:Generator_RowDeletedName="MoviesRowDeleted" msprop:Generator_RowClassName="MoviesRow" msprop:Generator_UserTableName="Movies" msprop:Generator_RowEvArgName="MoviesRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MovieName" msprop:Generator_ColumnVarNameInTable="columnMovieName" msprop:Generator_ColumnPropNameInRow="MovieName" msprop:Generator_ColumnPropNameInTable="MovieNameColumn" msprop:Generator_UserColumnName="MovieName" type="xs:string" minOccurs="0" />
+              <xs:element name="ReleaseYear" msprop:Generator_ColumnVarNameInTable="columnReleaseYear" msprop:Generator_ColumnPropNameInRow="ReleaseYear" msprop:Generator_ColumnPropNameInTable="ReleaseYearColumn" msprop:Generator_UserColumnName="ReleaseYear" type="xs:int" minOccurs="0" />
+              <xs:element name="UserRating" msprop:Generator_ColumnVarNameInTable="columnUserRating" msprop:Generator_ColumnPropNameInRow="UserRating" msprop:Generator_ColumnPropNameInTable="UserRatingColumn" msprop:Generator_UserColumnName="UserRating" type="xs:double" minOccurs="0" />
+              <xs:element name="IMDBRating" msprop:Generator_ColumnVarNameInTable="columnIMDBRating" msprop:Generator_ColumnPropNameInRow="IMDBRating" msprop:Generator_ColumnPropNameInTable="IMDBRatingColumn" msprop:Generator_UserColumnName="IMDBRating" type="xs:double" minOccurs="0" />
+              <xs:element name="Path" msprop:Generator_ColumnVarNameInTable="columnPath" msprop:Generator_ColumnPropNameInRow="Path" msprop:Generator_ColumnPropNameInTable="PathColumn" msprop:Generator_UserColumnName="Path" type="xs:string" minOccurs="0" />
+              <xs:element name="Watched" msprop:Generator_ColumnVarNameInTable="columnWatched" msprop:Generator_ColumnPropNameInRow="Watched" msprop:Generator_ColumnPropNameInTable="WatchedColumn" msprop:Generator_UserColumnName="Watched" type="xs:boolean" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

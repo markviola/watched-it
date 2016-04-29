@@ -10,15 +10,17 @@ namespace watched_it
     {
         private string Name;
         private int ReleaseYear;
-        private int Rating;
+        private double UserRating;
+        private double IMDBRating;
         private string Filepath;
         private bool Watched;
 
-        public Movie(string name, int releaseYear, string filepath)
+        public Movie(string name, int releaseYear, double userRating, double imdbRating, string filepath)
         {
             Name = name;
             ReleaseYear = releaseYear;
-            Rating = -1;    // Negative if movie is not rated by user
+            UserRating = userRating;    // Negative if movie is not rated by user
+            IMDBRating = imdbRating;    
             Filepath = filepath;
             Watched = false;
         }
@@ -43,14 +45,24 @@ namespace watched_it
             ReleaseYear = releaseYear;
         }
 
-        public int getRating()
+        public double getUserRating()
         {
-            return Rating;
+            return UserRating;
         }
 
-        public void setRating(int rating)
+        public void setUserRating(double userRating)
         {
-            Rating = rating;
+            UserRating = userRating;
+        }
+
+        public double getIMDBRating()
+        {
+            return IMDBRating;
+        }
+
+        public void setIMDBRating(double imdbRating)
+        {
+            IMDBRating = imdbRating;
         }
 
         public string getFilepath()
