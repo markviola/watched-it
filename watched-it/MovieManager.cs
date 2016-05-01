@@ -9,36 +9,29 @@ namespace watched_it
     class MovieManager
     {
         private List<Movie> Movies;
+        private List<Movie> FilteredMovies;
 
         public MovieManager()
         {
             Movies = new List<Movie>();
+            FilteredMovies = new List<Movie>();
         }
 
-        public List<Movie> getMovies()
-        {
-            return Movies;
-        }
+        // Functions for all movies in dataset
 
-        public void setMovies(List<Movie> movies)
-        {
-            Movies = movies;
-        }
+        public List<Movie> getMovies() { return Movies; }
+        public void setMovies(List<Movie> movies) { Movies = movies; }
+        public void addMovie(Movie movie) { Movies.Add(movie); }
+        public void deleteMovie(Movie movie) { Movies.Remove(movie); }
+        public void clearMovies() { Movies.Clear(); }
 
-        public void addMovie(Movie movie)
-        {
-            Movies.Add(movie);
-        }
+        // Functions for a filtered set of movies in the dataset
 
-        public void deleteMovie(Movie movie)
-        {
-            Movies.Remove(movie);
-        }
-
-        public void clearMovies()
-        {
-            Movies.Clear();
-        }
+        public List<Movie> getFilteredMovies() { return FilteredMovies; }
+        public void setFilteredMovies(List<Movie> filteredMovies) { FilteredMovies = filteredMovies; }
+        public void addFilteredMovie(Movie movie) { FilteredMovies.Add(movie); }
+        public void deleteFilteredMovie(Movie movie) { FilteredMovies.Remove(movie); }
+        public void clearFilteredMovies() { FilteredMovies.Clear(); }
 
         // Returns the list of movies that have been watched
         // out of all movies in the database
@@ -78,19 +71,19 @@ namespace watched_it
         public void sortMoviesAlphaIncr(int left, int right)
         {
             int i = left, j = right;
-            Movie pivot = Movies[(left + right) / 2];
+            Movie pivot = FilteredMovies[(left + right) / 2];
 
             while(i <= j)
             {
-                while(Movies[i].getName().CompareTo(pivot.getName()) < 0) { i++; }
-                while (Movies[j].getName().CompareTo(pivot.getName()) > 0) { j--; }
+                while(FilteredMovies[i].getName().CompareTo(pivot.getName()) < 0) { i++; }
+                while (FilteredMovies[j].getName().CompareTo(pivot.getName()) > 0) { j--; }
 
                 if( i <= j)
                 {
                     // Swap elements at i and j
-                    Movie temp = Movies[j];
-                    Movies[j] = Movies[i];
-                    Movies[i] = temp;
+                    Movie temp = FilteredMovies[j];
+                    FilteredMovies[j] = FilteredMovies[i];
+                    FilteredMovies[i] = temp;
 
                     i++;
                     j--;
@@ -105,19 +98,19 @@ namespace watched_it
         public void sortMoviesAlphaDecr(int left, int right)
         {
             int i = left, j = right;
-            Movie pivot = Movies[(left + right) / 2];
+            Movie pivot = FilteredMovies[(left + right) / 2];
 
             while (i <= j)
             {
-                while (Movies[i].getName().CompareTo(pivot.getName()) > 0) { i++; }
-                while (Movies[j].getName().CompareTo(pivot.getName()) < 0) { j--; }
+                while (FilteredMovies[i].getName().CompareTo(pivot.getName()) > 0) { i++; }
+                while (FilteredMovies[j].getName().CompareTo(pivot.getName()) < 0) { j--; }
 
                 if (i <= j)
                 {
                     // Swap elements at i and j
-                    Movie temp = Movies[j];
-                    Movies[j] = Movies[i];
-                    Movies[i] = temp;
+                    Movie temp = FilteredMovies[j];
+                    FilteredMovies[j] = FilteredMovies[i];
+                    FilteredMovies[i] = temp;
 
                     i++;
                     j--;
@@ -132,19 +125,19 @@ namespace watched_it
         public void sortMoviesReleaseYearIncr(int left, int right)
         {
             int i = left, j = right;
-            Movie pivot = Movies[(left + right) / 2];
+            Movie pivot = FilteredMovies[(left + right) / 2];
 
             while (i <= j)
             {
-                while (Movies[i].getReleaseYear() < pivot.getReleaseYear()) { i++; }
-                while (Movies[j].getReleaseYear() > pivot.getReleaseYear()) { j--; }
+                while (FilteredMovies[i].getReleaseYear() < pivot.getReleaseYear()) { i++; }
+                while (FilteredMovies[j].getReleaseYear() > pivot.getReleaseYear()) { j--; }
 
                 if (i <= j)
                 {
                     // Swap elements at i and j
-                    Movie temp = Movies[j];
-                    Movies[j] = Movies[i];
-                    Movies[i] = temp;
+                    Movie temp = FilteredMovies[j];
+                    FilteredMovies[j] = FilteredMovies[i];
+                    FilteredMovies[i] = temp;
 
                     i++;
                     j--;
@@ -159,19 +152,19 @@ namespace watched_it
         public void sortMoviesReleaseYearDecr(int left, int right)
         {
             int i = left, j = right;
-            Movie pivot = Movies[(left + right) / 2];
+            Movie pivot = FilteredMovies[(left + right) / 2];
 
             while (i <= j)
             {
-                while (Movies[i].getReleaseYear() > pivot.getReleaseYear()) { i++; }
-                while (Movies[j].getReleaseYear() < pivot.getReleaseYear()) { j--; }
+                while (FilteredMovies[i].getReleaseYear() > pivot.getReleaseYear()) { i++; }
+                while (FilteredMovies[j].getReleaseYear() < pivot.getReleaseYear()) { j--; }
 
                 if (i <= j)
                 {
                     // Swap elements at i and j
-                    Movie temp = Movies[j];
-                    Movies[j] = Movies[i];
-                    Movies[i] = temp;
+                    Movie temp = FilteredMovies[j];
+                    FilteredMovies[j] = FilteredMovies[i];
+                    FilteredMovies[i] = temp;
 
                     i++;
                     j--;
@@ -186,19 +179,19 @@ namespace watched_it
         public void sortMoviesUserRatingIncr(int left, int right)
         {
             int i = left, j = right;
-            Movie pivot = Movies[(left + right) / 2];
+            Movie pivot = FilteredMovies[(left + right) / 2];
 
             while (i <= j)
             {
-                while (Movies[i].getUserRating() < pivot.getUserRating()) { i++; }
-                while (Movies[j].getUserRating() > pivot.getUserRating()) { j--; }
+                while (FilteredMovies[i].getUserRating() < pivot.getUserRating()) { i++; }
+                while (FilteredMovies[j].getUserRating() > pivot.getUserRating()) { j--; }
 
                 if (i <= j)
                 {
                     // Swap elements at i and j
-                    Movie temp = Movies[j];
-                    Movies[j] = Movies[i];
-                    Movies[i] = temp;
+                    Movie temp = FilteredMovies[j];
+                    FilteredMovies[j] = FilteredMovies[i];
+                    FilteredMovies[i] = temp;
 
                     i++;
                     j--;
@@ -213,19 +206,19 @@ namespace watched_it
         public void sortMoviesUserRatingDecr(int left, int right)
         {
             int i = left, j = right;
-            Movie pivot = Movies[(left + right) / 2];
+            Movie pivot = FilteredMovies[(left + right) / 2];
 
             while (i <= j)
             {
-                while (Movies[i].getUserRating() > pivot.getUserRating()) { i++; }
-                while (Movies[j].getUserRating() < pivot.getUserRating()) { j--; }
+                while (FilteredMovies[i].getUserRating() > pivot.getUserRating()) { i++; }
+                while (FilteredMovies[j].getUserRating() < pivot.getUserRating()) { j--; }
 
                 if (i <= j)
                 {
                     // Swap elements at i and j
-                    Movie temp = Movies[j];
-                    Movies[j] = Movies[i];
-                    Movies[i] = temp;
+                    Movie temp = FilteredMovies[j];
+                    FilteredMovies[j] = FilteredMovies[i];
+                    FilteredMovies[i] = temp;
 
                     i++;
                     j--;
@@ -240,19 +233,19 @@ namespace watched_it
         public void sortMoviesIMDBRatingIncr(int left, int right)
         {
             int i = left, j = right;
-            Movie pivot = Movies[(left + right) / 2];
+            Movie pivot = FilteredMovies[(left + right) / 2];
 
             while (i <= j)
             {
-                while (Movies[i].getIMDBRating() < pivot.getIMDBRating()) { i++; }
-                while (Movies[j].getIMDBRating() > pivot.getIMDBRating()) { j--; }
+                while (FilteredMovies[i].getIMDBRating() < pivot.getIMDBRating()) { i++; }
+                while (FilteredMovies[j].getIMDBRating() > pivot.getIMDBRating()) { j--; }
 
                 if (i <= j)
                 {
                     // Swap elements at i and j
-                    Movie temp = Movies[j];
-                    Movies[j] = Movies[i];
-                    Movies[i] = temp;
+                    Movie temp = FilteredMovies[j];
+                    FilteredMovies[j] = FilteredMovies[i];
+                    FilteredMovies[i] = temp;
 
                     i++;
                     j--;
@@ -267,19 +260,19 @@ namespace watched_it
         public void sortMoviesIMDBRatingDecr(int left, int right)
         {
             int i = left, j = right;
-            Movie pivot = Movies[(left + right) / 2];
+            Movie pivot = FilteredMovies[(left + right) / 2];
 
             while (i <= j)
             {
-                while (Movies[i].getIMDBRating() > pivot.getIMDBRating()) { i++; }
-                while (Movies[j].getIMDBRating() < pivot.getIMDBRating()) { j--; }
+                while (FilteredMovies[i].getIMDBRating() > pivot.getIMDBRating()) { i++; }
+                while (FilteredMovies[j].getIMDBRating() < pivot.getIMDBRating()) { j--; }
 
                 if (i <= j)
                 {
                     // Swap elements at i and j
-                    Movie temp = Movies[j];
-                    Movies[j] = Movies[i];
-                    Movies[i] = temp;
+                    Movie temp = FilteredMovies[j];
+                    FilteredMovies[j] = FilteredMovies[i];
+                    FilteredMovies[i] = temp;
 
                     i++;
                     j--;

@@ -52,7 +52,7 @@
             this.increasingToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.searchButton = new System.Windows.Forms.Button();
-            this.searchInput = new System.Windows.Forms.TextBox();
+            this.searchInputTextBox = new System.Windows.Forms.TextBox();
             this.MovieList = new System.Windows.Forms.ListView();
             this.MovieColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ReleaseYearColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -65,6 +65,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.decreasingToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ResetSearchButton = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,7 +78,7 @@
             this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1017, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1092, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -96,19 +97,19 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.closeToolStripMenuItem.Text = "Close";
             // 
             // toolStripDropDownButton2
@@ -127,7 +128,7 @@
             // 
             this.gridToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("gridToolStripMenuItem.Image")));
             this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
-            this.gridToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.gridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.gridToolStripMenuItem.Text = "Grid";
             this.gridToolStripMenuItem.Click += new System.EventHandler(this.gridToolStripMenuItem_Click);
             // 
@@ -135,7 +136,7 @@
             // 
             this.imageListToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("imageListToolStripMenuItem.Image")));
             this.imageListToolStripMenuItem.Name = "imageListToolStripMenuItem";
-            this.imageListToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.imageListToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.imageListToolStripMenuItem.Text = "Image List";
             this.imageListToolStripMenuItem.Click += new System.EventHandler(this.imageListToolStripMenuItem_Click);
             // 
@@ -143,7 +144,7 @@
             // 
             this.textListToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("textListToolStripMenuItem.Image")));
             this.textListToolStripMenuItem.Name = "textListToolStripMenuItem";
-            this.textListToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.textListToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.textListToolStripMenuItem.Text = "Text List";
             this.textListToolStripMenuItem.Click += new System.EventHandler(this.textListToolStripMenuItem_Click);
             // 
@@ -263,7 +264,7 @@
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(930, 6);
+            this.searchButton.Location = new System.Drawing.Point(924, 7);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(75, 23);
             this.searchButton.TabIndex = 2;
@@ -271,13 +272,13 @@
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
-            // searchInput
+            // searchInputTextBox
             // 
-            this.searchInput.Location = new System.Drawing.Point(752, 8);
-            this.searchInput.Name = "searchInput";
-            this.searchInput.Size = new System.Drawing.Size(172, 20);
-            this.searchInput.TabIndex = 3;
-            this.searchInput.TextChanged += new System.EventHandler(this.searchInput_TextChanged);
+            this.searchInputTextBox.Location = new System.Drawing.Point(746, 9);
+            this.searchInputTextBox.Name = "searchInputTextBox";
+            this.searchInputTextBox.Size = new System.Drawing.Size(172, 20);
+            this.searchInputTextBox.TabIndex = 3;
+            this.searchInputTextBox.TextChanged += new System.EventHandler(this.searchInput_TextChanged);
             // 
             // MovieList
             // 
@@ -290,7 +291,7 @@
             this.MovieList.FullRowSelect = true;
             this.MovieList.Location = new System.Drawing.Point(12, 39);
             this.MovieList.Name = "MovieList";
-            this.MovieList.Size = new System.Drawing.Size(725, 483);
+            this.MovieList.Size = new System.Drawing.Size(906, 545);
             this.MovieList.TabIndex = 4;
             this.MovieList.UseCompatibleStateImageBehavior = false;
             this.MovieList.View = System.Windows.Forms.View.Details;
@@ -319,11 +320,11 @@
             // PathColumn
             // 
             this.PathColumn.Text = "Path";
-            this.PathColumn.Width = 236;
+            this.PathColumn.Width = 335;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(752, 50);
+            this.button1.Location = new System.Drawing.Point(966, 107);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
@@ -333,16 +334,16 @@
             // 
             // someIMGList
             // 
-            this.someIMGList.Location = new System.Drawing.Point(752, 88);
+            this.someIMGList.Location = new System.Drawing.Point(924, 136);
             this.someIMGList.Name = "someIMGList";
-            this.someIMGList.Size = new System.Drawing.Size(253, 434);
+            this.someIMGList.Size = new System.Drawing.Size(156, 448);
             this.someIMGList.TabIndex = 6;
             this.someIMGList.UseCompatibleStateImageBehavior = false;
             this.someIMGList.View = System.Windows.Forms.View.SmallIcon;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(841, 49);
+            this.button2.Location = new System.Drawing.Point(966, 49);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 7;
@@ -352,7 +353,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(930, 50);
+            this.button3.Location = new System.Drawing.Point(966, 78);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 8;
@@ -368,17 +369,28 @@
             this.decreasingToolStripMenuItem3.Text = "Decreasing";
             this.decreasingToolStripMenuItem3.Click += new System.EventHandler(this.decreasingToolStripMenuItem3_Click);
             // 
+            // ResetSearchButton
+            // 
+            this.ResetSearchButton.Location = new System.Drawing.Point(1005, 7);
+            this.ResetSearchButton.Name = "ResetSearchButton";
+            this.ResetSearchButton.Size = new System.Drawing.Size(75, 23);
+            this.ResetSearchButton.TabIndex = 9;
+            this.ResetSearchButton.Text = "Reset";
+            this.ResetSearchButton.UseVisualStyleBackColor = true;
+            this.ResetSearchButton.Click += new System.EventHandler(this.ResetSearchButton_Click);
+            // 
             // WatchedIt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1017, 554);
+            this.ClientSize = new System.Drawing.Size(1092, 596);
+            this.Controls.Add(this.ResetSearchButton);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.someIMGList);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.MovieList);
-            this.Controls.Add(this.searchInput);
+            this.Controls.Add(this.searchInputTextBox);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.toolStrip1);
             this.Name = "WatchedIt";
@@ -399,7 +411,7 @@
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.Button searchButton;
-        private System.Windows.Forms.TextBox searchInput;
+        private System.Windows.Forms.TextBox searchInputTextBox;
         private System.Windows.Forms.ListView MovieList;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ColumnHeader MovieColumn;
@@ -428,6 +440,7 @@
         private System.Windows.Forms.ToolStripMenuItem sortByIMDBRatingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem increasingToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem decreasingToolStripMenuItem3;
+        private System.Windows.Forms.Button ResetSearchButton;
     }
 }
 

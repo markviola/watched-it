@@ -25,65 +25,25 @@ namespace watched_it
             Watched = false;
         }
 
-        public string getName()
-        {
-            return Name;
-        }
+        // Getters and setters
 
-        public void setName(string name)
-        {
-            Name = name;
-        }
+        public string getName() { return Name; }
+        public void setName(string name) { Name = name; }
 
-        public int getReleaseYear()
-        {
-            return ReleaseYear;
-        }
+        public int getReleaseYear() { return ReleaseYear; }
+        public void setReleaseYear(int releaseYear) { ReleaseYear = releaseYear; }
 
-        public void setReleaseYear(int releaseYear)
-        {
-            ReleaseYear = releaseYear;
-        }
+        public double getUserRating() { return UserRating; }
+        public void setUserRating(double userRating) { UserRating = userRating; }
 
-        public double getUserRating()
-        {
-            return UserRating;
-        }
+        public double getIMDBRating() { return IMDBRating; }
+        public void setIMDBRating(double imdbRating) { IMDBRating = imdbRating; }
 
-        public void setUserRating(double userRating)
-        {
-            UserRating = userRating;
-        }
+        public string getFilepath() { return Filepath; }
+        public void setFilepath(string filepath)  { Filepath = filepath; }
 
-        public double getIMDBRating()
-        {
-            return IMDBRating;
-        }
-
-        public void setIMDBRating(double imdbRating)
-        {
-            IMDBRating = imdbRating;
-        }
-
-        public string getFilepath()
-        {
-            return Filepath;
-        }
-
-        public void setFilepath(string filepath)
-        {
-            Filepath = filepath;
-        }
-
-        public bool getWatched()
-        {
-            return Watched;
-        }
-
-        public void setWatched(bool watched)
-        {
-            Watched = watched;
-        }
+        public bool getWatched() { return Watched; }
+        public void setWatched(bool watched) { Watched = watched; }
 
     }
 }
