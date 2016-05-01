@@ -196,20 +196,21 @@ namespace watched_it
 
                     if (!allMoviesPaths[i].Equals(""))
                     {
-                        string googleSearch = @"http://google.com/search?q=" + @allMoviesPaths[i].Substring(allMovies[i].Length + 1) + @" imdb";
+                        string movieFileName = allMoviesPaths[i].Substring(allMovies[i].Length + 1);
+                        movieFileName = movieFileName.Substring(0, movieFileName.Length - 10);       //file extension and movie year in file name
+                        string imdbSearch = @"http://www.imdb.com/find?q=" + @movieFileName + @"&s=tt&ttype=ft&ref_=fn_ft";
                         //MessageBox.Show(googleSearch);
 
                         WebClient webClient = new WebClient();
-                        String html = webClient.DownloadString(googleSearch);
+                        String html = webClient.DownloadString(imdbSearch);
                         
-                        MatchCollection m1 = Regex.Matches(html, "<h3 class=\"r\">\\s*(.+?)\\s*</h3>", RegexOptions.Singleline);
+                        MatchCollection m1 = Regex.Matches(html, "<td class=\"result_text\"> <a href=\"\\s*(.+?)\\s*\" >", RegexOptions.Singleline);
 
                         string[] foundSearches = new string[m1.Count];
                         for (int j = 0; j < m1.Count; j++)
                         {
-                            var va = new Regex("<a href=\"/url\\?q=(.*)&amp;sa").Match(m1[j].Groups[1].Value);
-                            foundSearches[j] = va.Groups[1].Value;
-                            
+                            foundSearches[j] = @"http://www.imdb.com" + m1[j].Groups[1].Value;
+
                             if (isIMDBPage(foundSearches[j]))
                             {
                                 html = webClient.DownloadString(foundSearches[j]);
@@ -223,7 +224,7 @@ namespace watched_it
                                 movieRow["Path"] = newMovie.getFilepath();
                                 dtMovies.Rows.Add(movieRow);
 
-                                Thread.Sleep(1000);         // Wait some time so searches don't go too fast
+                                //Thread.Sleep(1000);         // Wait some time so searches don't go too fast
                                 break;
                             }
                         }
@@ -256,28 +257,29 @@ namespace watched_it
 
         private void button3_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < dbMovies.Tables["Movies"].Rows.Count; i++)
-            {
-                if (string.IsNullOrEmpty(dbMovies.Tables["Movies"].Rows[i]["ReleaseYear"].ToString()))
-                {
-                    MessageBox.Show(dbMovies.Tables["Movies"].Rows[i]["MovieName"].ToString());
-                }
-            }
+            //for (int i = 0; i < dbMovies.Tables["Movies"].Rows.Count; i++)
+            //{
+            //    if (string.IsNullOrEmpty(dbMovies.Tables["Movies"].Rows[i]["ReleaseYear"].ToString()))
+            //    {
+            //        MessageBox.Show(dbMovies.Tables["Movies"].Rows[i]["MovieName"].ToString());
+            //    }
+            //}
 
-            string googleSearch = @"https://google.com/search?q=" + @"Creed [2015] imdb";
+            string imdbSearch = @"http://www.imdb.com/find?q=" + @"Creed [2015]" + @"&s=tt&ttype=ft&ref_=fn_ft";
 
             WebClient webClient = new WebClient();
 
-            String html = webClient.DownloadString(googleSearch);
+            String html = webClient.DownloadString(imdbSearch);
             File.WriteAllText(System.AppDomain.CurrentDomain.BaseDirectory + "something.html", html);
 
-            MatchCollection m1 = Regex.Matches(html, "<h3 class=\"r\">\\s*(.+?)\\s*</h3>", RegexOptions.Singleline);
+            MatchCollection m1 = Regex.Matches(html, "<td class=\"result_text\"> <a href=\"\\s*(.+?)\\s*\" >", RegexOptions.Singleline);
 
             string[] foundSearches = new string[m1.Count];
             for (int i = 0; i < m1.Count; i++)
             {
-                var va = new Regex("<a href=\"/url\\?q=(.*)&amp;sa").Match(m1[i].Groups[1].Value);
-                foundSearches[i] = va.Groups[1].Value;
+                //var va = new Regex("<a href=\"/url\\?q=(.*)&amp;sa").Match(m1[i].Groups[1].Value);
+                foundSearches[i] = @"http://www.imdb.com" + m1[i].Groups[1].Value;
+                //MessageBox.Show(m1[i].Groups[1].Value);
             }
 
             // Get IMDB site html 
