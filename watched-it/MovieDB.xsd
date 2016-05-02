@@ -12,7 +12,7 @@
   <xs:element name="MovieDB" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="MovieDB" msprop:Generator_UserDSName="MovieDB">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Movies" msprop:Generator_TableClassName="MoviesDataTable" msprop:Generator_TableVarName="tableMovies" msprop:Generator_RowChangedName="MoviesRowChanged" msprop:Generator_TablePropName="Movies" msprop:Generator_RowDeletingName="MoviesRowDeleting" msprop:Generator_RowChangingName="MoviesRowChanging" msprop:Generator_RowEvHandlerName="MoviesRowChangeEventHandler" msprop:Generator_RowDeletedName="MoviesRowDeleted" msprop:Generator_RowClassName="MoviesRow" msprop:Generator_UserTableName="Movies" msprop:Generator_RowEvArgName="MoviesRowChangeEvent">
+        <xs:element name="Movies" msprop:Generator_TableClassName="MoviesDataTable" msprop:Generator_TableVarName="tableMovies" msprop:Generator_TablePropName="Movies" msprop:Generator_RowDeletingName="MoviesRowDeleting" msprop:Generator_RowChangingName="MoviesRowChanging" msprop:Generator_RowEvHandlerName="MoviesRowChangeEventHandler" msprop:Generator_RowDeletedName="MoviesRowDeleted" msprop:Generator_UserTableName="Movies" msprop:Generator_RowChangedName="MoviesRowChanged" msprop:Generator_RowEvArgName="MoviesRowChangeEvent" msprop:Generator_RowClassName="MoviesRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="MovieName" msprop:Generator_ColumnVarNameInTable="columnMovieName" msprop:Generator_ColumnPropNameInRow="MovieName" msprop:Generator_ColumnPropNameInTable="MovieNameColumn" msprop:Generator_UserColumnName="MovieName" type="xs:string" minOccurs="0" />
@@ -21,6 +21,7 @@
               <xs:element name="IMDBRating" msprop:Generator_ColumnVarNameInTable="columnIMDBRating" msprop:Generator_ColumnPropNameInRow="IMDBRating" msprop:Generator_ColumnPropNameInTable="IMDBRatingColumn" msprop:Generator_UserColumnName="IMDBRating" type="xs:double" minOccurs="0" />
               <xs:element name="Path" msprop:Generator_ColumnVarNameInTable="columnPath" msprop:Generator_ColumnPropNameInRow="Path" msprop:Generator_ColumnPropNameInTable="PathColumn" msprop:Generator_UserColumnName="Path" type="xs:string" minOccurs="0" />
               <xs:element name="Watched" msprop:Generator_ColumnVarNameInTable="columnWatched" msprop:Generator_ColumnPropNameInRow="Watched" msprop:Generator_ColumnPropNameInTable="WatchedColumn" msprop:Generator_UserColumnName="Watched" type="xs:boolean" minOccurs="0" />
+              <xs:element name="PicturePath" msprop:Generator_ColumnVarNameInTable="columnPicturePath" msprop:Generator_ColumnPropNameInRow="PicturePath" msprop:Generator_ColumnPropNameInTable="PicturePathColumn" msprop:Generator_UserColumnName="PicturePath" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

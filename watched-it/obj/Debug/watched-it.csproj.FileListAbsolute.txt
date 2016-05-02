@@ -7,3 +7,12 @@ C:\Users\Mark\Desktop\Projects\watched-it\watched-it\obj\Debug\watched-it.csproj
 C:\Users\Mark\Desktop\Projects\watched-it\watched-it\obj\Debug\watched-it.exe
 C:\Users\Mark\Desktop\Projects\watched-it\watched-it\obj\Debug\watched-it.pdb
 C:\Users\Mark\Desktop\Projects\watched-it\watched-it\obj\Debug\watched_it.WatchedIt.resources
+C:\Users\Tony\Desktop\Projects\watched-it\watched-it\bin\Debug\watched-it.exe.config
+C:\Users\Tony\Desktop\Projects\watched-it\watched-it\obj\Debug\watched-it.exe
+C:\Users\Tony\Desktop\Projects\watched-it\watched-it\obj\Debug\watched-it.pdb
+C:\Users\Tony\Desktop\Projects\watched-it\watched-it\bin\Debug\watched-it.exe
+C:\Users\Tony\Desktop\Projects\watched-it\watched-it\bin\Debug\watched-it.pdb
+C:\Users\Tony\Desktop\Projects\watched-it\watched-it\obj\Debug\watched-it.csprojResolveAssemblyReference.cache
+C:\Users\Tony\Desktop\Projects\watched-it\watched-it\obj\Debug\watched_it.WatchedIt.resources
+C:\Users\Tony\Desktop\Projects\watched-it\watched-it\obj\Debug\watched_it.Properties.Resources.resources
+C:\Users\Tony\Desktop\Projects\watched-it\watched-it\obj\Debug\watched-it.csproj.GenerateResource.Cache

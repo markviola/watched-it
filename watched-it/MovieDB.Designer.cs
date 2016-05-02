@@ -291,6 +291,8 @@ namespace watched_it {
             
             private global::System.Data.DataColumn columnWatched;
             
+            private global::System.Data.DataColumn columnPicturePath;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public MoviesDataTable() {
@@ -374,6 +376,14 @@ namespace watched_it {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PicturePathColumn {
+                get {
+                    return this.columnPicturePath;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -409,7 +419,7 @@ namespace watched_it {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MoviesRow AddMoviesRow(string MovieName, int ReleaseYear, double UserRating, double IMDBRating, string Path, bool Watched) {
+            public MoviesRow AddMoviesRow(string MovieName, int ReleaseYear, double UserRating, double IMDBRating, string Path, bool Watched, string PicturePath) {
                 MoviesRow rowMoviesRow = ((MoviesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         MovieName,
@@ -417,7 +427,8 @@ namespace watched_it {
                         UserRating,
                         IMDBRating,
                         Path,
-                        Watched};
+                        Watched,
+                        PicturePath};
                 rowMoviesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMoviesRow);
                 return rowMoviesRow;
@@ -446,6 +457,7 @@ namespace watched_it {
                 this.columnIMDBRating = base.Columns["IMDBRating"];
                 this.columnPath = base.Columns["Path"];
                 this.columnWatched = base.Columns["Watched"];
+                this.columnPicturePath = base.Columns["PicturePath"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -463,6 +475,8 @@ namespace watched_it {
                 base.Columns.Add(this.columnPath);
                 this.columnWatched = new global::System.Data.DataColumn("Watched", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnWatched);
+                this.columnPicturePath = new global::System.Data.DataColumn("PicturePath", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPicturePath);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -701,6 +715,22 @@ namespace watched_it {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string PicturePath {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovies.PicturePathColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PicturePath\' in table \'Movies\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovies.PicturePathColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsMovieNameNull() {
                 return this.IsNull(this.tableMovies.MovieNameColumn);
             }
@@ -769,6 +799,18 @@ namespace watched_it {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetWatchedNull() {
                 this[this.tableMovies.WatchedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPicturePathNull() {
+                return this.IsNull(this.tableMovies.PicturePathColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPicturePathNull() {
+                this[this.tableMovies.PicturePathColumn] = global::System.Convert.DBNull;
             }
         }
         

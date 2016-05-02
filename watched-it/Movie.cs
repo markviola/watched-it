@@ -13,15 +13,18 @@ namespace watched_it
         private double UserRating;
         private double IMDBRating;
         private string Filepath;
+        private string PicFilepath;
         private bool Watched;
 
-        public Movie(string name, int releaseYear, double userRating, double imdbRating, string filepath)
+        public Movie(string name, int releaseYear, double userRating, double imdbRating, 
+            string filepath, string picFilepath)
         {
             Name = name;
             ReleaseYear = releaseYear;
             UserRating = userRating;    // Negative if movie is not rated by user
             IMDBRating = imdbRating;    
             Filepath = filepath;
+            PicFilepath = picFilepath;
             Watched = false;
         }
 
@@ -41,6 +44,9 @@ namespace watched_it
 
         public string getFilepath() { return Filepath; }
         public void setFilepath(string filepath)  { Filepath = filepath; }
+
+        public string getPicFilepath() { return PicFilepath; }
+        public void setPicFilepath(string picFilepath) { PicFilepath = picFilepath; }
 
         public bool getWatched() { return Watched; }
         public void setWatched(bool watched) { Watched = watched; }

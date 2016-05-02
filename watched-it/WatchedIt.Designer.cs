@@ -50,6 +50,7 @@
             this.decreasingToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.sortByIMDBRatingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.increasingToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.decreasingToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.searchButton = new System.Windows.Forms.Button();
             this.searchInputTextBox = new System.Windows.Forms.TextBox();
@@ -64,8 +65,8 @@
             this.someIMGList = new System.Windows.Forms.ListView();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.decreasingToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetSearchButton = new System.Windows.Forms.Button();
+            this.PicFilepathColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,19 +98,19 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.closeToolStripMenuItem.Text = "Close";
             // 
             // toolStripDropDownButton2
@@ -128,7 +129,7 @@
             // 
             this.gridToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("gridToolStripMenuItem.Image")));
             this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
-            this.gridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.gridToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.gridToolStripMenuItem.Text = "Grid";
             this.gridToolStripMenuItem.Click += new System.EventHandler(this.gridToolStripMenuItem_Click);
             // 
@@ -136,7 +137,7 @@
             // 
             this.imageListToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("imageListToolStripMenuItem.Image")));
             this.imageListToolStripMenuItem.Name = "imageListToolStripMenuItem";
-            this.imageListToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.imageListToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.imageListToolStripMenuItem.Text = "Image List";
             this.imageListToolStripMenuItem.Click += new System.EventHandler(this.imageListToolStripMenuItem_Click);
             // 
@@ -144,7 +145,7 @@
             // 
             this.textListToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("textListToolStripMenuItem.Image")));
             this.textListToolStripMenuItem.Name = "textListToolStripMenuItem";
-            this.textListToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.textListToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.textListToolStripMenuItem.Text = "Text List";
             this.textListToolStripMenuItem.Click += new System.EventHandler(this.textListToolStripMenuItem_Click);
             // 
@@ -174,16 +175,16 @@
             // 
             this.increasingToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("increasingToolStripMenuItem.Image")));
             this.increasingToolStripMenuItem.Name = "increasingToolStripMenuItem";
-            this.increasingToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.increasingToolStripMenuItem.Text = "Increasing";
+            this.increasingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.increasingToolStripMenuItem.Text = "A->Z";
             this.increasingToolStripMenuItem.Click += new System.EventHandler(this.increasingToolStripMenuItem_Click);
             // 
             // decreasingToolStripMenuItem
             // 
             this.decreasingToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("decreasingToolStripMenuItem.Image")));
             this.decreasingToolStripMenuItem.Name = "decreasingToolStripMenuItem";
-            this.decreasingToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.decreasingToolStripMenuItem.Text = "Decreasing";
+            this.decreasingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.decreasingToolStripMenuItem.Text = "Z->A";
             this.decreasingToolStripMenuItem.Click += new System.EventHandler(this.decreasingToolStripMenuItem_Click);
             // 
             // sortByMovieNameToolStripMenuItem1
@@ -199,16 +200,16 @@
             // 
             this.increasingToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("increasingToolStripMenuItem1.Image")));
             this.increasingToolStripMenuItem1.Name = "increasingToolStripMenuItem1";
-            this.increasingToolStripMenuItem1.Size = new System.Drawing.Size(132, 22);
-            this.increasingToolStripMenuItem1.Text = "Increasing";
+            this.increasingToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.increasingToolStripMenuItem1.Text = "Old->New";
             this.increasingToolStripMenuItem1.Click += new System.EventHandler(this.increasingToolStripMenuItem1_Click);
             // 
             // decreasingToolStripMenuItem1
             // 
             this.decreasingToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("decreasingToolStripMenuItem1.Image")));
             this.decreasingToolStripMenuItem1.Name = "decreasingToolStripMenuItem1";
-            this.decreasingToolStripMenuItem1.Size = new System.Drawing.Size(132, 22);
-            this.decreasingToolStripMenuItem1.Text = "Decreasing";
+            this.decreasingToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.decreasingToolStripMenuItem1.Text = "New->Old";
             this.decreasingToolStripMenuItem1.Click += new System.EventHandler(this.decreasingToolStripMenuItem1_Click);
             // 
             // sortByUserRatingToolStripMenuItem
@@ -224,16 +225,16 @@
             // 
             this.increasingToolStripMenuItem2.Image = ((System.Drawing.Image)(resources.GetObject("increasingToolStripMenuItem2.Image")));
             this.increasingToolStripMenuItem2.Name = "increasingToolStripMenuItem2";
-            this.increasingToolStripMenuItem2.Size = new System.Drawing.Size(132, 22);
-            this.increasingToolStripMenuItem2.Text = "Increasing";
+            this.increasingToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.increasingToolStripMenuItem2.Text = "Low->High";
             this.increasingToolStripMenuItem2.Click += new System.EventHandler(this.increasingToolStripMenuItem2_Click);
             // 
             // decreasingToolStripMenuItem2
             // 
             this.decreasingToolStripMenuItem2.Image = ((System.Drawing.Image)(resources.GetObject("decreasingToolStripMenuItem2.Image")));
             this.decreasingToolStripMenuItem2.Name = "decreasingToolStripMenuItem2";
-            this.decreasingToolStripMenuItem2.Size = new System.Drawing.Size(132, 22);
-            this.decreasingToolStripMenuItem2.Text = "Decreasing";
+            this.decreasingToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.decreasingToolStripMenuItem2.Text = "High->Low";
             this.decreasingToolStripMenuItem2.Click += new System.EventHandler(this.decreasingToolStripMenuItem2_Click);
             // 
             // sortByIMDBRatingToolStripMenuItem
@@ -250,8 +251,16 @@
             this.increasingToolStripMenuItem3.Image = ((System.Drawing.Image)(resources.GetObject("increasingToolStripMenuItem3.Image")));
             this.increasingToolStripMenuItem3.Name = "increasingToolStripMenuItem3";
             this.increasingToolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
-            this.increasingToolStripMenuItem3.Text = "Increasing";
+            this.increasingToolStripMenuItem3.Text = "Low->High";
             this.increasingToolStripMenuItem3.Click += new System.EventHandler(this.increasingToolStripMenuItem3_Click);
+            // 
+            // decreasingToolStripMenuItem3
+            // 
+            this.decreasingToolStripMenuItem3.Image = ((System.Drawing.Image)(resources.GetObject("decreasingToolStripMenuItem3.Image")));
+            this.decreasingToolStripMenuItem3.Name = "decreasingToolStripMenuItem3";
+            this.decreasingToolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.decreasingToolStripMenuItem3.Text = "High->Low";
+            this.decreasingToolStripMenuItem3.Click += new System.EventHandler(this.decreasingToolStripMenuItem3_Click);
             // 
             // toolStripButton1
             // 
@@ -287,7 +296,8 @@
             this.ReleaseYearColumn,
             this.UserRatingColumn,
             this.IMDBRatingColumn,
-            this.PathColumn});
+            this.PathColumn,
+            this.PicFilepathColumn});
             this.MovieList.FullRowSelect = true;
             this.MovieList.Location = new System.Drawing.Point(12, 39);
             this.MovieList.Name = "MovieList";
@@ -320,7 +330,7 @@
             // PathColumn
             // 
             this.PathColumn.Text = "Path";
-            this.PathColumn.Width = 335;
+            this.PathColumn.Width = 233;
             // 
             // button1
             // 
@@ -361,14 +371,6 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // decreasingToolStripMenuItem3
-            // 
-            this.decreasingToolStripMenuItem3.Image = ((System.Drawing.Image)(resources.GetObject("decreasingToolStripMenuItem3.Image")));
-            this.decreasingToolStripMenuItem3.Name = "decreasingToolStripMenuItem3";
-            this.decreasingToolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
-            this.decreasingToolStripMenuItem3.Text = "Decreasing";
-            this.decreasingToolStripMenuItem3.Click += new System.EventHandler(this.decreasingToolStripMenuItem3_Click);
-            // 
             // ResetSearchButton
             // 
             this.ResetSearchButton.Location = new System.Drawing.Point(1005, 7);
@@ -378,6 +380,11 @@
             this.ResetSearchButton.Text = "Reset";
             this.ResetSearchButton.UseVisualStyleBackColor = true;
             this.ResetSearchButton.Click += new System.EventHandler(this.ResetSearchButton_Click);
+            // 
+            // PicFilepathColumn
+            // 
+            this.PicFilepathColumn.Text = "Pic Path";
+            this.PicFilepathColumn.Width = 187;
             // 
             // WatchedIt
             // 
@@ -441,6 +448,7 @@
         private System.Windows.Forms.ToolStripMenuItem increasingToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem decreasingToolStripMenuItem3;
         private System.Windows.Forms.Button ResetSearchButton;
+        private System.Windows.Forms.ColumnHeader PicFilepathColumn;
     }
 }
 

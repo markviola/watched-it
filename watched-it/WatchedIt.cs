@@ -120,6 +120,7 @@ namespace watched_it
                         movieRow["IMDBRating"] = -1;
                         movieRow["Path"] = allMoviesPaths[i];
                         dtMovies.Rows.Add(movieRow);
+                     
                     }
                 }
 
@@ -222,6 +223,7 @@ namespace watched_it
                                 movieRow["UserRating"] = -1;
                                 movieRow["IMDBRating"] = newMovie.getIMDBRating();
                                 movieRow["Path"] = newMovie.getFilepath();
+                                movieRow["PicturePath"] = newMovie.getPicFilepath();
                                 dtMovies.Rows.Add(movieRow);
 
                                 //Thread.Sleep(1000);         // Wait some time so searches don't go too fast
@@ -257,47 +259,27 @@ namespace watched_it
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //for (int i = 0; i < dbMovies.Tables["Movies"].Rows.Count; i++)
-            //{
-            //    if (string.IsNullOrEmpty(dbMovies.Tables["Movies"].Rows[i]["ReleaseYear"].ToString()))
-            //    {
-            //        MessageBox.Show(dbMovies.Tables["Movies"].Rows[i]["MovieName"].ToString());
-            //    }
-            //}
+            ////for (int i = 0; i < dbMovies.Tables["Movies"].Rows.Count; i++)
+            ////{
+            ////    if (string.IsNullOrEmpty(dbMovies.Tables["Movies"].Rows[i]["ReleaseYear"].ToString()))
+            ////    {
+            ////        MessageBox.Show(dbMovies.Tables["Movies"].Rows[i]["MovieName"].ToString());
+            ////    }
+            ////}
+            
+            string name = "Prisoners";
+            string html = File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "some.html");
 
-            string imdbSearch = @"http://www.imdb.com/find?q=" + @"Creed [2015]" + @"&s=tt&ttype=ft&ref_=fn_ft";
+            string picFilepath = "";
+            var picFilepathStr = new Regex(name+" Poster\"\nsrc=\"(.*)\"\nitemprop").Match(html);
 
-            WebClient webClient = new WebClient();
-
-            String html = webClient.DownloadString(imdbSearch);
-            File.WriteAllText(System.AppDomain.CurrentDomain.BaseDirectory + "something.html", html);
-
-            MatchCollection m1 = Regex.Matches(html, "<td class=\"result_text\"> <a href=\"\\s*(.+?)\\s*\" >", RegexOptions.Singleline);
-
-            string[] foundSearches = new string[m1.Count];
-            for (int i = 0; i < m1.Count; i++)
+            MessageBox.Show("About to check");
+            //MessageBox.Show("title=\"" + name + " Poster\"(.*)itemprop");
+            if (picFilepathStr.Length > 0)
             {
-                //var va = new Regex("<a href=\"/url\\?q=(.*)&amp;sa").Match(m1[i].Groups[1].Value);
-                foundSearches[i] = @"http://www.imdb.com" + m1[i].Groups[1].Value;
-                //MessageBox.Show(m1[i].Groups[1].Value);
+                picFilepath = picFilepathStr.Groups[1].Value;
+                MessageBox.Show(picFilepath);
             }
-
-            // Get IMDB site html 
-            html = webClient.DownloadString(foundSearches[0]);
-            File.WriteAllText(System.AppDomain.CurrentDomain.BaseDirectory + "some.html", html);
-
-            // Finds the movie name
-            MatchCollection m2 = Regex.Matches(html, "<div class=\"title_wrapper\">\\s*(.+?)\\s*<span id=\"titleYear\">", RegexOptions.Singleline);
-            var v = new Regex("<h1 itemprop=\"name\" class=\"\">(.*)&nbsp").Match(m2[0].Groups[1].Value);
-            MessageBox.Show(v.Groups[1].Value);
-
-            // Finds the movie year
-            var m3 = new Regex("<a href=\"/year/(.*)/\\?ref_=tt").Match(html);
-            MessageBox.Show(m3.Groups[1].Value);
-
-            //Find IMDB Rating
-            var m4 = new Regex("<span itemprop=\"ratingValue\">(.*)</span></strong>").Match(html);
-            MessageBox.Show(m4.Groups[1].Value);
 
         }
 
@@ -312,7 +294,8 @@ namespace watched_it
                     Int32.Parse(dbMovies.Tables["Movies"].Rows[i]["ReleaseYear"].ToString()),
                     double.Parse(dbMovies.Tables["Movies"].Rows[i]["UserRating"].ToString()),
                     double.Parse(dbMovies.Tables["Movies"].Rows[i]["IMDBRating"].ToString()),
-                    dbMovies.Tables["Movies"].Rows[i]["Path"].ToString()
+                    dbMovies.Tables["Movies"].Rows[i]["Path"].ToString(),
+                    dbMovies.Tables["Movies"].Rows[i]["PicturePath"].ToString()
                     );
                 movieManager.addMovie(tempMovie);
                 movieManager.addFilteredMovie(tempMovie);
@@ -346,6 +329,7 @@ namespace watched_it
                 }
 
                 lvi.SubItems.Add(movieManager.getFilteredMovies()[i].getFilepath());
+                lvi.SubItems.Add(movieManager.getFilteredMovies()[i].getPicFilepath());
                 MovieList.Items.Add(lvi);
             }
         }
@@ -354,7 +338,8 @@ namespace watched_it
         // Returns a Movie object given a string for the html for an IMDB webpage of a movie
         private Movie createMovieFromIMDB(string html, string filepath)
         {
-            //File.WriteAllText(System.AppDomain.CurrentDomain.BaseDirectory + "some.html", html);
+            File.WriteAllText(System.AppDomain.CurrentDomain.BaseDirectory + "some.html", html);
+            WebClient webClient = new WebClient();
 
             // Find the movie name
             string name = "";
@@ -380,8 +365,17 @@ namespace watched_it
             {
                 imdbRating = double.Parse(imdbRatingStr.Groups[1].Value);
             }
+
+            // Find poster picture
+            string picFilepath = "";
+            var picFilepathStr = new Regex(name + " Poster\"\nsrc=\"(.*)\"\nitemprop").Match(html);
+            if (picFilepathStr.Length > 0)
+            {
+                picFilepath = System.AppDomain.CurrentDomain.BaseDirectory + "poster_imgs/" + name + " Poster.jpg";
+                webClient.DownloadFile(picFilepathStr.Groups[1].Value, picFilepath);
+            }
             
-            return new Movie(name, releaseYear, -1, imdbRating, filepath);
+            return new Movie(name, releaseYear, -1, imdbRating, filepath, picFilepath);
         }
 
         private bool isIMDBPage(string webPageLink)
