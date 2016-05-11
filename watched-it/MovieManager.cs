@@ -8,6 +8,7 @@ namespace watched_it
 {
     class MovieManager
     {
+        private static MovieManager instance;
         private List<Movie> Movies;
         private List<Movie> FilteredMovies;
 
@@ -15,6 +16,15 @@ namespace watched_it
         {
             Movies = new List<Movie>();
             FilteredMovies = new List<Movie>();
+        }
+
+        public static MovieManager getInstance()
+        {
+            if(instance == null)
+            {
+                instance = new MovieManager();
+            }
+            return instance;
         }
 
         // Functions for all movies in dataset
@@ -32,6 +42,74 @@ namespace watched_it
         public void addFilteredMovie(Movie movie) { FilteredMovies.Add(movie); }
         public void deleteFilteredMovie(Movie movie) { FilteredMovies.Remove(movie); }
         public void clearFilteredMovies() { FilteredMovies.Clear(); }
+
+        // Get Movie object from name and release year
+        public Movie getMovieByNameAndRelease(string name, int releaseYear)
+        {
+            Movie movie = null;
+
+            for(int i=0; i<Movies.Count; i++)
+            {
+                if(Movies[i].getName().Equals(name) && Movies[i].getReleaseYear() == releaseYear)
+                {
+                    return Movies[i];
+                }
+            }
+
+            return movie;
+        }
+
+        // Edit the name of a movie
+        public void setMovieName(string oldName, string newName)
+        {
+            for(int i=0; i<Movies.Count; i++)
+            {
+                if (Movies[i].getName().Equals(oldName))
+                {
+                    Movies[i].setName(newName);
+                    break;
+                }
+            }
+        }
+
+        // Edit the release year of a movie
+        public void setMovieReleaseYear(string name, int newReleaseYear)
+        {
+            for (int i = 0; i < Movies.Count; i++)
+            {
+                if (Movies[i].getName().Equals(name))
+                {
+                    Movies[i].setReleaseYear(newReleaseYear);
+                    break;
+                }
+            }
+        }
+
+        // Edit the user rating of a movie
+        public void setMovieUserRating(string name, double newUserRating)
+        {
+            for (int i = 0; i < Movies.Count; i++)
+            {
+                if (Movies[i].getName().Equals(name))
+                {
+                    Movies[i].setUserRating(newUserRating);
+                    break;
+                }
+            }
+        }
+
+        // Edit if movie has been watched
+        public void setMovieWatched(string name, Boolean watched)
+        {
+            for (int i = 0; i < Movies.Count; i++)
+            {
+                if (Movies[i].getName().Equals(name))
+                {
+                    Movies[i].setWatched(watched);
+                    break;
+                }
+            }
+        }
 
         // Returns the list of movies that have been watched
         // out of all movies in the database

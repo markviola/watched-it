@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditMovie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditMovie.Designer.cs">
+      <DependentUpon>EditMovie.cs</DependentUpon>
+    </Compile>
     <Compile Include="MovieDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -62,6 +68,9 @@
     <Compile Include="MovieManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="EditMovie.resx">
+      <DependentUpon>EditMovie.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WatchedIt.resx">
       <DependentUpon>WatchedIt.cs</DependentUpon>
     </EmbeddedResource>

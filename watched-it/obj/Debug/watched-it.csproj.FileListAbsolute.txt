@@ -16,3 +16,4 @@ C:\Users\Tony\Desktop\Projects\watched-it\watched-it\obj\Debug\watched-it.csproj
 C:\Users\Tony\Desktop\Projects\watched-it\watched-it\obj\Debug\watched_it.WatchedIt.resources
 C:\Users\Tony\Desktop\Projects\watched-it\watched-it\obj\Debug\watched_it.Properties.Resources.resources
 C:\Users\Tony\Desktop\Projects\watched-it\watched-it\obj\Debug\watched-it.csproj.GenerateResource.Cache
+C:\Users\Tony\Desktop\Projects\watched-it\watched-it\obj\Debug\watched_it.EditMovie.resources

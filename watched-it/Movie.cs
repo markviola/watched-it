@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace watched_it
 {
-    class Movie
+    public class Movie
     {
         private string Name;
         private int ReleaseYear;

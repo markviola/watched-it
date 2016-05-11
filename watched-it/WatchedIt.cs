@@ -19,7 +19,7 @@ namespace watched_it
     {
         // Initialize data holders
         MovieDB dbMovies = new MovieDB();
-        MovieManager movieManager = new MovieManager();
+        //MovieManager movieManager = new MovieManager();
 
         // Initialize web object
         // WebClient webClient = new WebClient();
@@ -49,12 +49,12 @@ namespace watched_it
         // Filters the movies shown in the ListView dependant on the input search text
         private void searchButton_Click(object sender, EventArgs e)
         {
-            movieManager.clearFilteredMovies();
-            for(int i=0; i<movieManager.getMovies().Count; i++)
+            MovieManager.getInstance().clearFilteredMovies();
+            for(int i=0; i< MovieManager.getInstance().getMovies().Count; i++)
             {
-                if (movieManager.getMovies()[i].getName().ToLower().Contains(searchInputTextBox.Text.ToLower()))
+                if (MovieManager.getInstance().getMovies()[i].getName().ToLower().Contains(searchInputTextBox.Text.ToLower()))
                 {
-                    movieManager.addFilteredMovie(movieManager.getMovies()[i]);
+                    MovieManager.getInstance().addFilteredMovie(MovieManager.getInstance().getMovies()[i]);
                 }
             }
             populateListView();
@@ -75,90 +75,6 @@ namespace watched_it
 
         private void toolStripButton1_Click_1(object sender, EventArgs e)
         {
-            // Clear current Movie list
-            dbMovies.Clear();
-            
-            // Get the DataTable for Movies
-            DataTable dtMovies = dbMovies.Tables["Movies"];
-
-            // Prompt User for directory path for movie lists
-            // Note: Each movie must be in a subdirectory of this selected directory
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-
-            if(fbd.ShowDialog() == DialogResult.OK)
-            {
-                allMovies = System.IO.Directory.GetDirectories(@fbd.SelectedPath, "*", System.IO.SearchOption.AllDirectories);
-
-                allMoviesPaths = new string[allMovies.Length];
-                for (int k = 0; k < allMoviesPaths.Length; k++) { allMoviesPaths[k] = ""; }
-
-                for (int i = 0; i < allMovies.Length; i++)
-                {
-                    // Get .mkv, .mp4, and .avi files
-                    string[] mkvFiles = System.IO.Directory.GetFiles(allMovies[i], "*.mkv", System.IO.SearchOption.AllDirectories);
-                    string[] mp4Files = System.IO.Directory.GetFiles(allMovies[i], "*.mp4", System.IO.SearchOption.AllDirectories);
-                    string[] aviFiles = System.IO.Directory.GetFiles(allMovies[i], "*.avi", System.IO.SearchOption.AllDirectories);
-                    if (mkvFiles.Length > 0)
-                    {
-                        mkvFiles.CopyTo(allMoviesPaths, i);
-                    }
-                    else if (mp4Files.Length > 0)
-                    {
-                        mp4Files.CopyTo(allMoviesPaths, i);
-                    }
-                    else if (aviFiles.Length > 0)
-                    {
-                        aviFiles.CopyTo(allMoviesPaths, i);
-                    }
-
-                    if (!allMoviesPaths[i].Equals(""))
-                    {
-                        DataRow movieRow = dtMovies.NewRow();
-                        movieRow["MovieName"] = allMoviesPaths[i].Substring(allMovies[i].Length + 1);
-                        movieRow["ReleaseYear"] = 2000;
-                        movieRow["UserRating"] = -1;
-                        movieRow["IMDBRating"] = -1;
-                        movieRow["Path"] = allMoviesPaths[i];
-                        dtMovies.Rows.Add(movieRow);
-                     
-                    }
-                }
-
-                dtMovies.WriteXml(XMLlocation);         // Store movie data in XML
-                getMovieDBData();                       // Populate MovieManager
-                populateListView();                     // Populate ListView
-            }
-            
-        }
-
-        private void MovieList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //string imgPath = System.AppDomain.CurrentDomain.BaseDirectory + "..\\..\\..\\imgs";
-            //string[] images = System.IO.Directory.GetFiles(@imgPath, "*.png", System.IO.SearchOption.AllDirectories);
-
-            //// Store all images from the imgs directory to the images array
-            //for (int i = 0; i < images.Length; i++)
-            //{
-            //    imgList.Images.Add(i.ToString(), Image.FromFile(images[i]));
-            //}
-
-            //// Put all images from image array to ListView
-            //for (int j = 0; j < images.Length; j++)
-            //{
-            //    ListViewItem lvi = new ListViewItem();
-            //    lvi.ImageIndex = j;
-            //    someIMGList.Items.Add(lvi);
-            //}
-
-            //// Set the image lists for the ListView
-            //someIMGList.SmallImageList = imgList;
-            //someIMGList.LargeImageList = imgList;
-
             // Clear current Movie list
             dbMovies.Clear();
 
@@ -204,7 +120,7 @@ namespace watched_it
 
                         WebClient webClient = new WebClient();
                         String html = webClient.DownloadString(imdbSearch);
-                        
+
                         MatchCollection m1 = Regex.Matches(html, "<td class=\"result_text\"> <a href=\"\\s*(.+?)\\s*\" >", RegexOptions.Singleline);
 
                         string[] foundSearches = new string[m1.Count];
@@ -236,6 +152,46 @@ namespace watched_it
                 dtMovies.WriteXml(XMLlocation);         // Store movie data in XML
                 getMovieDBData();                       // Populate MovieManager
                 populateListView();                     // Populate ListView
+            }
+
+        }
+
+        private void MovieList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //string imgPath = System.AppDomain.CurrentDomain.BaseDirectory + "..\\..\\..\\imgs";
+            //string[] images = System.IO.Directory.GetFiles(@imgPath, "*.png", System.IO.SearchOption.AllDirectories);
+
+            //// Store all images from the imgs directory to the images array
+            //for (int i = 0; i < images.Length; i++)
+            //{
+            //    imgList.Images.Add(i.ToString(), Image.FromFile(images[i]));
+            //}
+
+            //// Put all images from image array to ListView
+            //for (int j = 0; j < images.Length; j++)
+            //{
+            //    ListViewItem lvi = new ListViewItem();
+            //    lvi.ImageIndex = j;
+            //    someIMGList.Items.Add(lvi);
+            //}
+
+            //// Set the image lists for the ListView
+            //someIMGList.SmallImageList = imgList;
+            //someIMGList.LargeImageList = imgList;
+
+            EditMovie editMovie = new EditMovie(this);
+
+            if(MovieList.SelectedItems.Count == 1)
+            {
+                editMovie.setSelectedMovie(MovieManager.getInstance().getMovieByNameAndRelease(
+                    MovieList.SelectedItems[0].SubItems[0].Text,
+                    Int32.Parse(MovieList.SelectedItems[0].SubItems[1].Text)));
+                editMovie.Show();
             }
         }
 
@@ -286,8 +242,8 @@ namespace watched_it
         // Populate the MovieManager object with the movie data found in the database
         private void getMovieDBData()
         {
-            movieManager.clearMovies();
-            movieManager.clearFilteredMovies();
+            MovieManager.getInstance().clearMovies();
+            MovieManager.getInstance().clearFilteredMovies();
             for (int i = 0; i < dbMovies.Tables["Movies"].Rows.Count; i++)
             {
                 Movie tempMovie = new Movie(dbMovies.Tables["Movies"].Rows[i]["MovieName"].ToString(),
@@ -297,8 +253,8 @@ namespace watched_it
                     dbMovies.Tables["Movies"].Rows[i]["Path"].ToString(),
                     dbMovies.Tables["Movies"].Rows[i]["PicturePath"].ToString()
                     );
-                movieManager.addMovie(tempMovie);
-                movieManager.addFilteredMovie(tempMovie);
+                MovieManager.getInstance().addMovie(tempMovie);
+                MovieManager.getInstance().addFilteredMovie(tempMovie);
             }
         }
 
@@ -306,30 +262,30 @@ namespace watched_it
         private void populateListView()
         {
             MovieList.Items.Clear();
-            for (int i=0; i<movieManager.getFilteredMovies().Count; i++)
+            for (int i=0; i< MovieManager.getInstance().getFilteredMovies().Count; i++)
             {
-                ListViewItem lvi = new ListViewItem(movieManager.getFilteredMovies()[i].getName());
-                lvi.SubItems.Add(movieManager.getFilteredMovies()[i].getReleaseYear().ToString());
+                ListViewItem lvi = new ListViewItem(MovieManager.getInstance().getFilteredMovies()[i].getName());
+                lvi.SubItems.Add(MovieManager.getInstance().getFilteredMovies()[i].getReleaseYear().ToString());
 
-                if(movieManager.getFilteredMovies()[i].getUserRating() != -1)
+                if(MovieManager.getInstance().getFilteredMovies()[i].getUserRating() != -1)
                 {
-                    lvi.SubItems.Add(movieManager.getFilteredMovies()[i].getUserRating().ToString());
+                    lvi.SubItems.Add(MovieManager.getInstance().getFilteredMovies()[i].getUserRating().ToString());
                 }
                 else {
                     lvi.SubItems.Add("N/A");
                 }
 
-                if (movieManager.getFilteredMovies()[i].getIMDBRating() != -1)
+                if (MovieManager.getInstance().getFilteredMovies()[i].getIMDBRating() != -1)
                 {
-                    lvi.SubItems.Add(movieManager.getFilteredMovies()[i].getIMDBRating().ToString());
+                    lvi.SubItems.Add(MovieManager.getInstance().getFilteredMovies()[i].getIMDBRating().ToString());
                 }
                 else
                 {
                     lvi.SubItems.Add("N/A");
                 }
 
-                lvi.SubItems.Add(movieManager.getFilteredMovies()[i].getFilepath());
-                lvi.SubItems.Add(movieManager.getFilteredMovies()[i].getPicFilepath());
+                lvi.SubItems.Add(MovieManager.getInstance().getFilteredMovies()[i].getFilepath());
+                lvi.SubItems.Add(MovieManager.getInstance().getFilteredMovies()[i].getPicFilepath());
                 MovieList.Items.Add(lvi);
             }
         }
@@ -392,56 +348,64 @@ namespace watched_it
 
         private void increasingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            movieManager.sortMoviesAlphaIncr(0, movieManager.getFilteredMovies().Count - 1);
+            MovieManager.getInstance().sortMoviesAlphaIncr(0, MovieManager.getInstance().getFilteredMovies().Count - 1);
             populateListView();
         }
 
         private void decreasingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            movieManager.sortMoviesAlphaDecr(0, movieManager.getFilteredMovies().Count - 1);
+            MovieManager.getInstance().sortMoviesAlphaDecr(0, MovieManager.getInstance().getFilteredMovies().Count - 1);
             populateListView();
         }
 
         private void increasingToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            movieManager.sortMoviesReleaseYearIncr(0, movieManager.getFilteredMovies().Count - 1);
+            MovieManager.getInstance().sortMoviesReleaseYearIncr(0, MovieManager.getInstance().getFilteredMovies().Count - 1);
             populateListView();
         }
 
         private void decreasingToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            movieManager.sortMoviesReleaseYearDecr(0, movieManager.getFilteredMovies().Count - 1);
+            MovieManager.getInstance().sortMoviesReleaseYearDecr(0, MovieManager.getInstance().getFilteredMovies().Count - 1);
             populateListView();
         }
 
         private void increasingToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            movieManager.sortMoviesUserRatingIncr(0, movieManager.getFilteredMovies().Count - 1);
+            MovieManager.getInstance().sortMoviesUserRatingIncr(0, MovieManager.getInstance().getFilteredMovies().Count - 1);
             populateListView();
         }
 
         private void decreasingToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            movieManager.sortMoviesUserRatingDecr(0, movieManager.getFilteredMovies().Count - 1);
+            MovieManager.getInstance().sortMoviesUserRatingDecr(0, MovieManager.getInstance().getFilteredMovies().Count - 1);
             populateListView();
         }
 
         private void increasingToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            movieManager.sortMoviesIMDBRatingIncr(0, movieManager.getFilteredMovies().Count - 1);
+            MovieManager.getInstance().sortMoviesIMDBRatingIncr(0, MovieManager.getInstance().getFilteredMovies().Count - 1);
             populateListView();
         }
 
         private void decreasingToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            movieManager.sortMoviesIMDBRatingDecr(0, movieManager.getFilteredMovies().Count - 1);
+            MovieManager.getInstance().sortMoviesIMDBRatingDecr(0, MovieManager.getInstance().getFilteredMovies().Count - 1);
             populateListView();
         }
 
         private void ResetSearchButton_Click(object sender, EventArgs e)
         {
-            movieManager.clearFilteredMovies();
-            movieManager.setFilteredMovies(movieManager.getMovies().ToList());
+            MovieManager.getInstance().clearFilteredMovies();
+            MovieManager.getInstance().setFilteredMovies(MovieManager.getInstance().getMovies().ToList());
+            populateListView();
+            searchInputTextBox.Text = "";
+        }
+
+        public void updateList()
+        {
+            MovieManager.getInstance().clearFilteredMovies();
+            MovieManager.getInstance().setFilteredMovies(MovieManager.getInstance().getMovies().ToList());
             populateListView();
             searchInputTextBox.Text = "";
         }
