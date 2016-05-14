@@ -12,32 +12,43 @@ namespace watched_it
 {
     public partial class EditMovie : Form
     {
-        Movie SelectedMovie;
         WatchedIt MainForm;
+        MovieDB dbMovies;
 
-        public EditMovie(WatchedIt mainForm)
+        Movie SelectedMovie;
+        String XMLlocation = Application.StartupPath + @"\XMLMovies.xml";
+
+        public EditMovie(WatchedIt mainForm, MovieDB DBMovies)
         {
             InitializeComponent();
             MainForm = mainForm;
+            dbMovies = DBMovies;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            var checkedButton = UserRatingGroupBox.Controls.OfType<RadioButton>()
+                                      .FirstOrDefault(r => r.Checked);
+            
+            // Edit user rating of the movie
+            if (checkedButton != null)
+            {
+                updateDB(NameTextBox.Text, Int32.Parse(ReleaseYearTextBox.Text), 
+                    Int32.Parse(checkedButton.Name.Replace("UserRatingRadioButton", "")), WatchedRadioButtonYes.Checked);
+                MovieManager.getInstance().setMovieUserRating(SelectedMovie.getName(),
+                    Int32.Parse(checkedButton.Name.Replace("UserRatingRadioButton", "")));
+            }
+            else
+            {
+                updateDB(NameTextBox.Text, Int32.Parse(ReleaseYearTextBox.Text), -1, WatchedRadioButtonYes.Checked);
+            }
+
             // Edit movie name
             MovieManager.getInstance().setMovieName(SelectedMovie.getName(), NameTextBox.Text);
 
             // Edit movie release date
-            MovieManager.getInstance().setMovieReleaseYear(SelectedMovie.getName(), 
+            MovieManager.getInstance().setMovieReleaseYear(SelectedMovie.getName(),
                 Int32.Parse(ReleaseYearTextBox.Text));
-            
-            // Edit user rating of the movie
-            var checkedButton = UserRatingGroupBox.Controls.OfType<RadioButton>()
-                                      .FirstOrDefault(r => r.Checked);
-            if(checkedButton != null)
-            {
-                MovieManager.getInstance().setMovieUserRating(SelectedMovie.getName(),
-                    Int32.Parse(checkedButton.Name.Replace("UserRatingRadioButton", "")));
-            }
 
             // Edit if movie has been watched
             if (WatchedRadioButtonYes.Checked)
@@ -109,6 +120,24 @@ namespace watched_it
             {
                 WatchedRadioButtonNo.Checked = true;
             }
+        }
+
+        // Update the XML file with the new, editted data
+        private void updateDB(string newName, int newReleaseYear, double newUserRating, Boolean newWatched)
+        {
+            DataRow[] movieRow = dbMovies.Tables["Movies"].Select(
+                "MovieName = '"+ SelectedMovie.getName() + "' AND ReleaseYear = '" + 
+                SelectedMovie.getReleaseYear() + "'");
+                        
+            movieRow[0]["MovieName"] = newName;
+            movieRow[0]["ReleaseYear"] = newReleaseYear;
+            movieRow[0]["Watched"] = newWatched;
+            if(newUserRating != -1)
+            {
+                movieRow[0]["UserRating"] = newUserRating;
+            }
+            
+            dbMovies.Tables["Movies"].WriteXml(XMLlocation);
         }
 
     }

@@ -140,6 +140,7 @@ namespace watched_it
                                 movieRow["IMDBRating"] = newMovie.getIMDBRating();
                                 movieRow["Path"] = newMovie.getFilepath();
                                 movieRow["PicturePath"] = newMovie.getPicFilepath();
+                                movieRow["Watched"] = newMovie.getWatched();
                                 dtMovies.Rows.Add(movieRow);
 
                                 //Thread.Sleep(1000);         // Wait some time so searches don't go too fast
@@ -184,7 +185,7 @@ namespace watched_it
             //someIMGList.SmallImageList = imgList;
             //someIMGList.LargeImageList = imgList;
 
-            EditMovie editMovie = new EditMovie(this);
+            EditMovie editMovie = new EditMovie(this, dbMovies);
 
             if(MovieList.SelectedItems.Count == 1)
             {
@@ -222,20 +223,24 @@ namespace watched_it
             ////        MessageBox.Show(dbMovies.Tables["Movies"].Rows[i]["MovieName"].ToString());
             ////    }
             ////}
-            
-            string name = "Prisoners";
-            string html = File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "some.html");
 
-            string picFilepath = "";
-            var picFilepathStr = new Regex(name+" Poster\"\nsrc=\"(.*)\"\nitemprop").Match(html);
+            //string name = "Prisoners";
+            //string html = File.ReadAllText(System.AppDomain.CurrentDomain.BaseDirectory + "some.html");
 
-            MessageBox.Show("About to check");
-            //MessageBox.Show("title=\"" + name + " Poster\"(.*)itemprop");
-            if (picFilepathStr.Length > 0)
-            {
-                picFilepath = picFilepathStr.Groups[1].Value;
-                MessageBox.Show(picFilepath);
-            }
+            //string picFilepath = "";
+            //var picFilepathStr = new Regex(name+" Poster\"\nsrc=\"(.*)\"\nitemprop").Match(html);
+
+            //MessageBox.Show("About to check");
+            ////MessageBox.Show("title=\"" + name + " Poster\"(.*)itemprop");
+            //if (picFilepathStr.Length > 0)
+            //{
+            //    picFilepath = picFilepathStr.Groups[1].Value;
+            //    MessageBox.Show(picFilepath);
+            //}
+
+            DataRow[] movieRow = dbMovies.Tables["Movies"].Select("MovieName = 'Good Will Hunting' AND ReleaseYear = '1998'");
+
+            MessageBox.Show(movieRow[0]["Path"].ToString());
 
         }
 
@@ -246,12 +251,14 @@ namespace watched_it
             MovieManager.getInstance().clearFilteredMovies();
             for (int i = 0; i < dbMovies.Tables["Movies"].Rows.Count; i++)
             {
+
                 Movie tempMovie = new Movie(dbMovies.Tables["Movies"].Rows[i]["MovieName"].ToString(),
                     Int32.Parse(dbMovies.Tables["Movies"].Rows[i]["ReleaseYear"].ToString()),
                     double.Parse(dbMovies.Tables["Movies"].Rows[i]["UserRating"].ToString()),
                     double.Parse(dbMovies.Tables["Movies"].Rows[i]["IMDBRating"].ToString()),
                     dbMovies.Tables["Movies"].Rows[i]["Path"].ToString(),
-                    dbMovies.Tables["Movies"].Rows[i]["PicturePath"].ToString()
+                    dbMovies.Tables["Movies"].Rows[i]["PicturePath"].ToString(),
+                    Boolean.Parse(dbMovies.Tables["Movies"].Rows[i]["Watched"].ToString())
                     );
                 MovieManager.getInstance().addMovie(tempMovie);
                 MovieManager.getInstance().addFilteredMovie(tempMovie);
@@ -327,11 +334,25 @@ namespace watched_it
             var picFilepathStr = new Regex(name + " Poster\"\nsrc=\"(.*)\"\nitemprop").Match(html);
             if (picFilepathStr.Length > 0)
             {
-                picFilepath = System.AppDomain.CurrentDomain.BaseDirectory + "poster_imgs/" + name + " Poster.jpg";
+                picFilepath = System.AppDomain.CurrentDomain.BaseDirectory + "poster_imgs/" + validFileStr(name) + " Poster.jpg";
                 webClient.DownloadFile(picFilepathStr.Groups[1].Value, picFilepath);
             }
             
-            return new Movie(name, releaseYear, -1, imdbRating, filepath, picFilepath);
+            return new Movie(name, releaseYear, -1, imdbRating, filepath, picFilepath, false);
+        }
+
+        private string validFileStr(string name)
+        {
+            name = name.Replace("\\", "");
+            name = name.Replace("/", "");
+            name = name.Replace(":", "");
+            name = name.Replace("*", "");
+            name = name.Replace("?", "");
+            name = name.Replace("<", "");
+            name = name.Replace(">", "");
+            name = name.Replace("|", "");
+
+            return name;
         }
 
         private bool isIMDBPage(string webPageLink)

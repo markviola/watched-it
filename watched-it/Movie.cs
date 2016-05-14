@@ -14,10 +14,10 @@ namespace watched_it
         private double IMDBRating;
         private string Filepath;
         private string PicFilepath;
-        private bool Watched;
+        private Boolean Watched;
 
         public Movie(string name, int releaseYear, double userRating, double imdbRating, 
-            string filepath, string picFilepath)
+            string filepath, string picFilepath, Boolean watched)
         {
             Name = name;
             ReleaseYear = releaseYear;
@@ -25,7 +25,7 @@ namespace watched_it
             IMDBRating = imdbRating;    
             Filepath = filepath;
             PicFilepath = picFilepath;
-            Watched = false;
+            Watched = watched;
         }
 
         // Getters and setters
