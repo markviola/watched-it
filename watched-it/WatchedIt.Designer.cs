@@ -36,7 +36,6 @@
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.gridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.imageListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
             this.sortByMovieNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -117,7 +116,6 @@
             // 
             this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.gridToolStripMenuItem,
-            this.imageListToolStripMenuItem,
             this.textListToolStripMenuItem});
             this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -132,14 +130,6 @@
             this.gridToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.gridToolStripMenuItem.Text = "Grid";
             this.gridToolStripMenuItem.Click += new System.EventHandler(this.gridToolStripMenuItem_Click);
-            // 
-            // imageListToolStripMenuItem
-            // 
-            this.imageListToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("imageListToolStripMenuItem.Image")));
-            this.imageListToolStripMenuItem.Name = "imageListToolStripMenuItem";
-            this.imageListToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            this.imageListToolStripMenuItem.Text = "Image List";
-            this.imageListToolStripMenuItem.Click += new System.EventHandler(this.imageListToolStripMenuItem_Click);
             // 
             // textListToolStripMenuItem
             // 
@@ -339,7 +329,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(966, 107);
+            this.button1.Location = new System.Drawing.Point(966, 78);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
@@ -368,7 +358,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(966, 78);
+            this.button3.Location = new System.Drawing.Point(966, 107);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 8;
@@ -425,7 +415,6 @@
         private System.Windows.Forms.ColumnHeader PathColumn;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
         private System.Windows.Forms.ToolStripMenuItem gridToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem imageListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem textListToolStripMenuItem;
         private System.DirectoryServices.DirectoryEntry directoryEntry1;
         private System.Windows.Forms.ListView someIMGList;

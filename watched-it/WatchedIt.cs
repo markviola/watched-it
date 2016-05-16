@@ -38,6 +38,10 @@ namespace watched_it
                 dbMovies.ReadXml(XMLlocation);
                 getMovieDBData();
                 populateListView();
+
+                MovieList.SmallImageList = null;
+                MovieList.LargeImageList = null;
+                MovieList.View = View.Details;
             }
         }
 
@@ -153,6 +157,10 @@ namespace watched_it
                 dtMovies.WriteXml(XMLlocation);         // Store movie data in XML
                 getMovieDBData();                       // Populate MovieManager
                 populateListView();                     // Populate ListView
+
+                MovieList.SmallImageList = null;
+                MovieList.LargeImageList = null;
+                MovieList.View = View.Details;
             }
 
         }
@@ -164,6 +172,8 @@ namespace watched_it
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //imgList.ImageSize = new Size(100, 100);
+
             //string imgPath = System.AppDomain.CurrentDomain.BaseDirectory + "..\\..\\..\\imgs";
             //string[] images = System.IO.Directory.GetFiles(@imgPath, "*.png", System.IO.SearchOption.AllDirectories);
 
@@ -187,30 +197,28 @@ namespace watched_it
 
             EditMovie editMovie = new EditMovie(this, dbMovies);
 
-            if(MovieList.SelectedItems.Count == 1)
+            if (MovieList.SelectedItems.Count == 1)
             {
                 editMovie.setSelectedMovie(MovieManager.getInstance().getMovieByNameAndRelease(
                     MovieList.SelectedItems[0].SubItems[0].Text,
                     Int32.Parse(MovieList.SelectedItems[0].SubItems[1].Text)));
                 editMovie.Show();
             }
+
         }
 
         // Display the movies in standard image grid form
         private void gridToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            MovieList.LargeImageList = imgList;
             MovieList.View = View.LargeIcon;
-        }
-
-        // Display the movies in grid form, but with smaller icons
-        private void imageListToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MovieList.View = View.SmallIcon;
         }
 
         // Display the movies using a basic text list format
         private void textListToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            MovieList.SmallImageList = null;
+            MovieList.LargeImageList = null;
             MovieList.View = View.Details;
         }
 
@@ -238,9 +246,41 @@ namespace watched_it
             //    MessageBox.Show(picFilepath);
             //}
 
-            DataRow[] movieRow = dbMovies.Tables["Movies"].Select("MovieName = 'Good Will Hunting' AND ReleaseYear = '1998'");
 
-            MessageBox.Show(movieRow[0]["Path"].ToString());
+
+            //DataRow[] movieRow = dbMovies.Tables["Movies"].Select("MovieName = 'Good Will Hunting' AND ReleaseYear = '1998'");
+
+            //MessageBox.Show(movieRow[0]["Path"].ToString());
+
+
+            MovieList.Items.Clear();
+            imgList.ImageSize = new Size(100, 150);
+
+            string imgPath = System.AppDomain.CurrentDomain.BaseDirectory + "poster_imgs";
+            string[] images = System.IO.Directory.GetFiles(@imgPath, "*.jpg", System.IO.SearchOption.AllDirectories);
+
+            // Store all images from the imgs directory to the images array
+            for (int i = 0; i < images.Length; i++)
+            {
+                imgList.Images.Add(Image.FromFile(images[i]));
+            }
+
+            //// Put all images from image array to ListView
+            //for (int j = 0; j < images.Length; j++)
+            //{
+            //    ListViewItem lvi = new ListViewItem();
+            //    lvi.ImageIndex = j;
+            //    MovieList.Items.Add(lvi);
+            //}
+
+            // Set the image lists for the ListView
+            MovieList.SmallImageList = imgList;
+            MovieList.LargeImageList = imgList;
+            ListViewItem lvi = new ListViewItem("some name ok");
+            lvi.ImageIndex = 0;
+            lvi.SubItems.Add("some name");
+            lvi.SubItems.Add("some release");
+            MovieList.Items.Add(lvi);
 
         }
 
@@ -262,6 +302,7 @@ namespace watched_it
                     );
                 MovieManager.getInstance().addMovie(tempMovie);
                 MovieManager.getInstance().addFilteredMovie(tempMovie);
+                imgList.Images.Add(Image.FromFile(dbMovies.Tables["Movies"].Rows[i]["PicturePath"].ToString()));
             }
         }
 
@@ -269,6 +310,9 @@ namespace watched_it
         private void populateListView()
         {
             MovieList.Items.Clear();
+            imgList.ImageSize = new Size(100, 150);
+            MovieList.SmallImageList = imgList;
+            MovieList.LargeImageList = imgList;
             for (int i=0; i< MovieManager.getInstance().getFilteredMovies().Count; i++)
             {
                 ListViewItem lvi = new ListViewItem(MovieManager.getInstance().getFilteredMovies()[i].getName());
@@ -293,6 +337,7 @@ namespace watched_it
 
                 lvi.SubItems.Add(MovieManager.getInstance().getFilteredMovies()[i].getFilepath());
                 lvi.SubItems.Add(MovieManager.getInstance().getFilteredMovies()[i].getPicFilepath());
+                lvi.ImageIndex = i;
                 MovieList.Items.Add(lvi);
             }
         }
@@ -334,8 +379,22 @@ namespace watched_it
             var picFilepathStr = new Regex(name + " Poster\"\nsrc=\"(.*)\"\nitemprop").Match(html);
             if (picFilepathStr.Length > 0)
             {
-                picFilepath = System.AppDomain.CurrentDomain.BaseDirectory + "poster_imgs/" + validFileStr(name) + " Poster.jpg";
-                webClient.DownloadFile(picFilepathStr.Groups[1].Value, picFilepath);
+                try
+                {
+                    picFilepath = System.AppDomain.CurrentDomain.BaseDirectory + "poster_imgs/" + validFileStr(name) + " Poster.jpg";
+                    webClient.DownloadFile(picFilepathStr.Groups[1].Value, picFilepath);
+                    imgList.Images.Add(Image.FromFile(picFilepath));
+                } catch(Exception e)
+                {
+                    // Use generic default image for the poster image
+                    picFilepath = System.AppDomain.CurrentDomain.BaseDirectory + "..\\..\\..\\imgs\\img_not_found.png"; ;
+                    imgList.Images.Add(Image.FromFile(picFilepath));
+                }
+            } else
+            {
+                // Use generic default image for the poster image
+                picFilepath = System.AppDomain.CurrentDomain.BaseDirectory + "..\\..\\..\\imgs\\img_not_found.png"; ;
+                imgList.Images.Add(Image.FromFile(picFilepath));
             }
             
             return new Movie(name, releaseYear, -1, imdbRating, filepath, picFilepath, false);
@@ -351,6 +410,8 @@ namespace watched_it
             name = name.Replace("<", "");
             name = name.Replace(">", "");
             name = name.Replace("|", "");
+            name = name.Replace(".", "");
+            name = name.Replace(",", "");
 
             return name;
         }
@@ -358,7 +419,6 @@ namespace watched_it
         private bool isIMDBPage(string webPageLink)
         {
             var webPageName = new Regex("www\\.(.*)\\.").Match(webPageLink);
-            //MessageBox.Show(webPageName.Groups[1].Value);
             if (webPageName.Groups[1].Value.Equals("imdb")){
                 return true;
             }
