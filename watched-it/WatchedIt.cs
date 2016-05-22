@@ -19,11 +19,7 @@ namespace watched_it
     {
         // Initialize data holders
         MovieDB dbMovies = new MovieDB();
-        //MovieManager movieManager = new MovieManager();
-
-        // Initialize web object
-        // WebClient webClient = new WebClient();
-
+        
         string[] allMovies;
         string[] allMoviesPaths;
         ImageList imgList = new ImageList();
@@ -38,11 +34,14 @@ namespace watched_it
                 dbMovies.ReadXml(XMLlocation);
                 getMovieDBData();
                 populateListView();
-
-                MovieList.SmallImageList = null;
-                MovieList.LargeImageList = null;
-                MovieList.View = View.Details;
             }
+
+            movieDetailsPosterImg.Hide();
+            movieDetailsNameAndYear.Hide();
+            movieDetailsDescription.Hide();
+            movieDetailsIMDBRating.Hide();
+            movieDetailsUserRating.Hide();
+            movieDetailsWatched.Hide();
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -62,11 +61,6 @@ namespace watched_it
                 }
             }
             populateListView();
-        }
-
-        private void searchInput_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -120,7 +114,6 @@ namespace watched_it
                         string movieFileName = allMoviesPaths[i].Substring(allMovies[i].Length + 1);
                         movieFileName = movieFileName.Substring(0, movieFileName.Length - 10);       //file extension and movie year in file name
                         string imdbSearch = @"http://www.imdb.com/find?q=" + @movieFileName + @"&s=tt&ttype=ft&ref_=fn_ft";
-                        //MessageBox.Show(googleSearch);
 
                         WebClient webClient = new WebClient();
                         String html = webClient.DownloadString(imdbSearch);
@@ -139,6 +132,7 @@ namespace watched_it
 
                                 DataRow movieRow = dtMovies.NewRow();
                                 movieRow["MovieName"] = newMovie.getName();
+                                movieRow["Description"] = newMovie.getDescription();
                                 movieRow["ReleaseYear"] = newMovie.getReleaseYear();
                                 movieRow["UserRating"] = -1;
                                 movieRow["IMDBRating"] = newMovie.getIMDBRating();
@@ -159,8 +153,8 @@ namespace watched_it
                 populateListView();                     // Populate ListView
 
                 MovieList.SmallImageList = null;
-                MovieList.LargeImageList = null;
-                MovieList.View = View.Details;
+                MovieList.LargeImageList = imgList;
+                MovieList.View = View.LargeIcon;
             }
 
         }
@@ -293,6 +287,7 @@ namespace watched_it
             {
 
                 Movie tempMovie = new Movie(dbMovies.Tables["Movies"].Rows[i]["MovieName"].ToString(),
+                    dbMovies.Tables["Movies"].Rows[i]["Description"].ToString(),
                     Int32.Parse(dbMovies.Tables["Movies"].Rows[i]["ReleaseYear"].ToString()),
                     double.Parse(dbMovies.Tables["Movies"].Rows[i]["UserRating"].ToString()),
                     double.Parse(dbMovies.Tables["Movies"].Rows[i]["IMDBRating"].ToString()),
@@ -300,6 +295,7 @@ namespace watched_it
                     dbMovies.Tables["Movies"].Rows[i]["PicturePath"].ToString(),
                     Boolean.Parse(dbMovies.Tables["Movies"].Rows[i]["Watched"].ToString())
                     );
+                tempMovie.setImgIndex(i);
                 MovieManager.getInstance().addMovie(tempMovie);
                 MovieManager.getInstance().addFilteredMovie(tempMovie);
                 imgList.Images.Add(Image.FromFile(dbMovies.Tables["Movies"].Rows[i]["PicturePath"].ToString()));
@@ -322,7 +318,8 @@ namespace watched_it
                 {
                     lvi.SubItems.Add(MovieManager.getInstance().getFilteredMovies()[i].getUserRating().ToString());
                 }
-                else {
+                else
+                {
                     lvi.SubItems.Add("N/A");
                 }
 
@@ -337,7 +334,7 @@ namespace watched_it
 
                 lvi.SubItems.Add(MovieManager.getInstance().getFilteredMovies()[i].getFilepath());
                 lvi.SubItems.Add(MovieManager.getInstance().getFilteredMovies()[i].getPicFilepath());
-                lvi.ImageIndex = i;
+                lvi.ImageIndex = MovieManager.getInstance().getFilteredMovies()[i].getImgIndex();
                 MovieList.Items.Add(lvi);
             }
         }
@@ -356,6 +353,14 @@ namespace watched_it
             {
                 var nameStr = new Regex("<h1 itemprop=\"name\" class=\"\">(.*)&nbsp").Match(m2[0].Groups[1].Value);
                 name = nameStr.Groups[1].Value;
+            }
+
+            // Find the movie description
+            string description = "";
+            var descriptionStr = new Regex("<div class=\"summary_text\" itemprop=\"description\">\n                    (.*)\n            </div>").Match(html);
+            if(descriptionStr.Length > 0)
+            {
+                description = descriptionStr.Groups[1].Value;
             }
 
             // Find the movie release year
@@ -397,7 +402,7 @@ namespace watched_it
                 imgList.Images.Add(Image.FromFile(picFilepath));
             }
             
-            return new Movie(name, releaseYear, -1, imdbRating, filepath, picFilepath, false);
+            return new Movie(name, description, releaseYear, -1, imdbRating, filepath, picFilepath, false);
         }
 
         private string validFileStr(string name)
@@ -489,6 +494,48 @@ namespace watched_it
             MovieManager.getInstance().setFilteredMovies(MovieManager.getInstance().getMovies().ToList());
             populateListView();
             searchInputTextBox.Text = "";
+        }
+
+        // Allows user to execute search by pressing the Enter key
+        private void searchInputTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                searchButton_Click(this, new EventArgs());
+            }
+        }
+
+        // Populate movie details page after clicking on listview item
+        private void MovieList_ItemActivate(object sender, EventArgs e)
+        {
+            if (MovieList.SelectedItems.Count == 1)
+            {
+                Movie currentMovie = MovieManager.getInstance().getMovieByNameAndRelease(
+                    MovieList.SelectedItems[0].SubItems[0].Text,
+                    Int32.Parse(MovieList.SelectedItems[0].SubItems[1].Text));
+
+                movieDetailsNameAndYear.Font = new Font(movieDetailsNameAndYear.Font, FontStyle.Bold);
+                movieDetailsPosterImg.Show();
+                movieDetailsNameAndYear.Show();
+                movieDetailsDescription.Show();
+                movieDetailsIMDBRating.Show();
+                movieDetailsUserRating.Show();
+                movieDetailsWatched.Show();
+
+                movieDetailsPosterImg.Image = Image.FromFile(currentMovie.getPicFilepath());
+                movieDetailsNameAndYear.Text = currentMovie.getName() + " (" + currentMovie.getReleaseYear() + ")";
+                movieDetailsDescription.Text = currentMovie.getDescription();
+                movieDetailsIMDBRating.Text = "IMDB RAting: " + currentMovie.getIMDBRating();
+                if(currentMovie.getUserRating() != -1)
+                {
+                    movieDetailsUserRating.Text = "User Rating: " + currentMovie.getUserRating();
+                }
+                else
+                {
+                    movieDetailsUserRating.Text = "User Rating: N/A";
+                }
+                movieDetailsWatched.Text = "Watched: " + currentMovie.getWatched();
+            }
         }
     }
 }

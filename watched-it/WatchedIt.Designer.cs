@@ -62,11 +62,19 @@
             this.PicFilepathColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button1 = new System.Windows.Forms.Button();
             this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
-            this.someIMGList = new System.Windows.Forms.ListView();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.ResetSearchButton = new System.Windows.Forms.Button();
+            this.movieDetailsPanel = new System.Windows.Forms.Panel();
+            this.movieDetailsWatched = new System.Windows.Forms.Label();
+            this.movieDetailsUserRating = new System.Windows.Forms.Label();
+            this.movieDetailsIMDBRating = new System.Windows.Forms.Label();
+            this.movieDetailsNameAndYear = new System.Windows.Forms.Label();
+            this.movieDetailsPosterImg = new System.Windows.Forms.PictureBox();
+            this.movieDetailsDescription = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
+            this.movieDetailsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.movieDetailsPosterImg)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -78,7 +86,7 @@
             this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1092, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1189, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -127,7 +135,7 @@
             // 
             this.gridToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("gridToolStripMenuItem.Image")));
             this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
-            this.gridToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.gridToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.gridToolStripMenuItem.Text = "Grid";
             this.gridToolStripMenuItem.Click += new System.EventHandler(this.gridToolStripMenuItem_Click);
             // 
@@ -135,7 +143,7 @@
             // 
             this.textListToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("textListToolStripMenuItem.Image")));
             this.textListToolStripMenuItem.Name = "textListToolStripMenuItem";
-            this.textListToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.textListToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.textListToolStripMenuItem.Text = "Text List";
             this.textListToolStripMenuItem.Click += new System.EventHandler(this.textListToolStripMenuItem_Click);
             // 
@@ -263,7 +271,7 @@
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(924, 7);
+            this.searchButton.Location = new System.Drawing.Point(1021, 5);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(75, 23);
             this.searchButton.TabIndex = 2;
@@ -273,14 +281,15 @@
             // 
             // searchInputTextBox
             // 
-            this.searchInputTextBox.Location = new System.Drawing.Point(746, 9);
+            this.searchInputTextBox.Location = new System.Drawing.Point(838, 5);
             this.searchInputTextBox.Name = "searchInputTextBox";
             this.searchInputTextBox.Size = new System.Drawing.Size(172, 20);
             this.searchInputTextBox.TabIndex = 3;
-            this.searchInputTextBox.TextChanged += new System.EventHandler(this.searchInput_TextChanged);
+            this.searchInputTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchInputTextBox_KeyDown);
             // 
             // MovieList
             // 
+            this.MovieList.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.MovieList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.MovieColumn,
             this.ReleaseYearColumn,
@@ -291,10 +300,10 @@
             this.MovieList.FullRowSelect = true;
             this.MovieList.Location = new System.Drawing.Point(12, 39);
             this.MovieList.Name = "MovieList";
-            this.MovieList.Size = new System.Drawing.Size(906, 545);
+            this.MovieList.Size = new System.Drawing.Size(906, 573);
             this.MovieList.TabIndex = 4;
             this.MovieList.UseCompatibleStateImageBehavior = false;
-            this.MovieList.View = System.Windows.Forms.View.Details;
+            this.MovieList.ItemActivate += new System.EventHandler(this.MovieList_ItemActivate);
             this.MovieList.SelectedIndexChanged += new System.EventHandler(this.MovieList_SelectedIndexChanged);
             // 
             // MovieColumn
@@ -329,7 +338,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(966, 78);
+            this.button1.Location = new System.Drawing.Point(935, 589);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
@@ -337,18 +346,9 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // someIMGList
-            // 
-            this.someIMGList.Location = new System.Drawing.Point(924, 136);
-            this.someIMGList.Name = "someIMGList";
-            this.someIMGList.Size = new System.Drawing.Size(156, 448);
-            this.someIMGList.TabIndex = 6;
-            this.someIMGList.UseCompatibleStateImageBehavior = false;
-            this.someIMGList.View = System.Windows.Forms.View.SmallIcon;
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(966, 49);
+            this.button2.Location = new System.Drawing.Point(1016, 589);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 7;
@@ -358,7 +358,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(966, 107);
+            this.button3.Location = new System.Drawing.Point(1102, 589);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 8;
@@ -368,7 +368,7 @@
             // 
             // ResetSearchButton
             // 
-            this.ResetSearchButton.Location = new System.Drawing.Point(1005, 7);
+            this.ResetSearchButton.Location = new System.Drawing.Point(1102, 5);
             this.ResetSearchButton.Name = "ResetSearchButton";
             this.ResetSearchButton.Size = new System.Drawing.Size(75, 23);
             this.ResetSearchButton.TabIndex = 9;
@@ -376,24 +376,103 @@
             this.ResetSearchButton.UseVisualStyleBackColor = true;
             this.ResetSearchButton.Click += new System.EventHandler(this.ResetSearchButton_Click);
             // 
+            // movieDetailsPanel
+            // 
+            this.movieDetailsPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.movieDetailsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.movieDetailsPanel.Controls.Add(this.movieDetailsDescription);
+            this.movieDetailsPanel.Controls.Add(this.movieDetailsWatched);
+            this.movieDetailsPanel.Controls.Add(this.movieDetailsUserRating);
+            this.movieDetailsPanel.Controls.Add(this.movieDetailsIMDBRating);
+            this.movieDetailsPanel.Controls.Add(this.movieDetailsNameAndYear);
+            this.movieDetailsPanel.Controls.Add(this.movieDetailsPosterImg);
+            this.movieDetailsPanel.Location = new System.Drawing.Point(935, 39);
+            this.movieDetailsPanel.Name = "movieDetailsPanel";
+            this.movieDetailsPanel.Size = new System.Drawing.Size(242, 544);
+            this.movieDetailsPanel.TabIndex = 10;
+            // 
+            // movieDetailsWatched
+            // 
+            this.movieDetailsWatched.AutoSize = true;
+            this.movieDetailsWatched.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.movieDetailsWatched.Location = new System.Drawing.Point(14, 497);
+            this.movieDetailsWatched.Name = "movieDetailsWatched";
+            this.movieDetailsWatched.Size = new System.Drawing.Size(68, 17);
+            this.movieDetailsWatched.TabIndex = 4;
+            this.movieDetailsWatched.Text = "Watched:";
+            // 
+            // movieDetailsUserRating
+            // 
+            this.movieDetailsUserRating.AutoSize = true;
+            this.movieDetailsUserRating.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.movieDetailsUserRating.Location = new System.Drawing.Point(14, 480);
+            this.movieDetailsUserRating.Name = "movieDetailsUserRating";
+            this.movieDetailsUserRating.Size = new System.Drawing.Size(91, 17);
+            this.movieDetailsUserRating.TabIndex = 3;
+            this.movieDetailsUserRating.Text = "User Rating: ";
+            // 
+            // movieDetailsIMDBRating
+            // 
+            this.movieDetailsIMDBRating.AutoSize = true;
+            this.movieDetailsIMDBRating.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.movieDetailsIMDBRating.Location = new System.Drawing.Point(14, 463);
+            this.movieDetailsIMDBRating.Name = "movieDetailsIMDBRating";
+            this.movieDetailsIMDBRating.Size = new System.Drawing.Size(94, 17);
+            this.movieDetailsIMDBRating.TabIndex = 2;
+            this.movieDetailsIMDBRating.Text = "IMDB Rating: ";
+            // 
+            // movieDetailsNameAndYear
+            // 
+            this.movieDetailsNameAndYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.movieDetailsNameAndYear.Location = new System.Drawing.Point(13, 287);
+            this.movieDetailsNameAndYear.Name = "movieDetailsNameAndYear";
+            this.movieDetailsNameAndYear.Size = new System.Drawing.Size(213, 83);
+            this.movieDetailsNameAndYear.TabIndex = 1;
+            this.movieDetailsNameAndYear.Text = "Movie Name (Year)";
+            // 
+            // movieDetailsPosterImg
+            // 
+            this.movieDetailsPosterImg.BackColor = System.Drawing.SystemColors.Window;
+            this.movieDetailsPosterImg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.movieDetailsPosterImg.Location = new System.Drawing.Point(17, 14);
+            this.movieDetailsPosterImg.Name = "movieDetailsPosterImg";
+            this.movieDetailsPosterImg.Size = new System.Drawing.Size(174, 259);
+            this.movieDetailsPosterImg.TabIndex = 0;
+            this.movieDetailsPosterImg.TabStop = false;
+            // 
+            // movieDetailsDescription
+            // 
+            this.movieDetailsDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.movieDetailsDescription.Location = new System.Drawing.Point(14, 370);
+            this.movieDetailsDescription.Name = "movieDetailsDescription";
+            this.movieDetailsDescription.Size = new System.Drawing.Size(209, 89);
+            this.movieDetailsDescription.TabIndex = 5;
+            this.movieDetailsDescription.Text = "Description";
+            // 
             // WatchedIt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1092, 596);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(1189, 624);
+            this.Controls.Add(this.movieDetailsPanel);
             this.Controls.Add(this.ResetSearchButton);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.someIMGList);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.MovieList);
             this.Controls.Add(this.searchInputTextBox);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.toolStrip1);
             this.Name = "WatchedIt";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.ShowIcon = false;
             this.Text = "Watched It";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.movieDetailsPanel.ResumeLayout(false);
+            this.movieDetailsPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.movieDetailsPosterImg)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -417,7 +496,6 @@
         private System.Windows.Forms.ToolStripMenuItem gridToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem textListToolStripMenuItem;
         private System.DirectoryServices.DirectoryEntry directoryEntry1;
-        private System.Windows.Forms.ListView someIMGList;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ColumnHeader ReleaseYearColumn;
@@ -438,6 +516,13 @@
         private System.Windows.Forms.ToolStripMenuItem decreasingToolStripMenuItem3;
         private System.Windows.Forms.Button ResetSearchButton;
         private System.Windows.Forms.ColumnHeader PicFilepathColumn;
+        private System.Windows.Forms.Panel movieDetailsPanel;
+        private System.Windows.Forms.PictureBox movieDetailsPosterImg;
+        private System.Windows.Forms.Label movieDetailsUserRating;
+        private System.Windows.Forms.Label movieDetailsIMDBRating;
+        private System.Windows.Forms.Label movieDetailsNameAndYear;
+        private System.Windows.Forms.Label movieDetailsWatched;
+        private System.Windows.Forms.Label movieDetailsDescription;
     }
 }
 

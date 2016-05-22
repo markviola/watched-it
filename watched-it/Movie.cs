@@ -9,17 +9,20 @@ namespace watched_it
     public class Movie
     {
         private string Name;
+        private string Description;
         private int ReleaseYear;
         private double UserRating;
         private double IMDBRating;
         private string Filepath;
         private string PicFilepath;
+        private int ImgIndex;
         private Boolean Watched;
 
-        public Movie(string name, int releaseYear, double userRating, double imdbRating, 
+        public Movie(string name, string description, int releaseYear, double userRating, double imdbRating, 
             string filepath, string picFilepath, Boolean watched)
         {
             Name = name;
+            Description = description;
             ReleaseYear = releaseYear;
             UserRating = userRating;    // Negative if movie is not rated by user
             IMDBRating = imdbRating;    
@@ -32,6 +35,9 @@ namespace watched_it
 
         public string getName() { return Name; }
         public void setName(string name) { Name = name; }
+
+        public string getDescription() { return Description; }
+        public void setDescription(string description) { Description = description; }
 
         public int getReleaseYear() { return ReleaseYear; }
         public void setReleaseYear(int releaseYear) { ReleaseYear = releaseYear; }
@@ -50,6 +56,9 @@ namespace watched_it
 
         public bool getWatched() { return Watched; }
         public void setWatched(bool watched) { Watched = watched; }
+
+        public int getImgIndex() { return ImgIndex; }
+        public void setImgIndex(int imgIndex) { ImgIndex = imgIndex; }
 
     }
 }

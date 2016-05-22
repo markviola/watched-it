@@ -53,6 +53,9 @@
     <Compile Include="EditMovie.Designer.cs">
       <DependentUpon>EditMovie.cs</DependentUpon>
     </Compile>
+    <Compile Include="MovieDB.cs">
+      <DependentUpon>MovieDB.xsd</DependentUpon>
+    </Compile>
     <Compile Include="MovieDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
