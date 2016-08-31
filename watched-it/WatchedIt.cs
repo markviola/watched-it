@@ -87,6 +87,7 @@ namespace watched_it
             {
                 allMovies = System.IO.Directory.GetDirectories(@fbd.SelectedPath, "*", System.IO.SearchOption.AllDirectories);
 
+                // Create an array for the lcoation of the movie files
                 allMoviesPaths = new string[allMovies.Length];
                 for (int k = 0; k < allMoviesPaths.Length; k++) { allMoviesPaths[k] = ""; }
 
@@ -295,7 +296,7 @@ namespace watched_it
                     dbMovies.Tables["Movies"].Rows[i]["PicturePath"].ToString(),
                     Boolean.Parse(dbMovies.Tables["Movies"].Rows[i]["Watched"].ToString())
                     );
-                tempMovie.setImgIndex(i);
+                tempMovie.setImgIndex(i);               
                 MovieManager.getInstance().addMovie(tempMovie);
                 MovieManager.getInstance().addFilteredMovie(tempMovie);
                 imgList.Images.Add(Image.FromFile(dbMovies.Tables["Movies"].Rows[i]["PicturePath"].ToString()));
@@ -307,7 +308,7 @@ namespace watched_it
         {
             MovieList.Items.Clear();
             imgList.ImageSize = new Size(100, 150);
-            MovieList.SmallImageList = imgList;
+            MovieList.SmallImageList = null;
             MovieList.LargeImageList = imgList;
             for (int i=0; i< MovieManager.getInstance().getFilteredMovies().Count; i++)
             {
@@ -360,7 +361,8 @@ namespace watched_it
             var descriptionStr = new Regex("<div class=\"summary_text\" itemprop=\"description\">\n                    (.*)\n            </div>").Match(html);
             if(descriptionStr.Length > 0)
             {
-                description = descriptionStr.Groups[1].Value;
+                description = removeLinkHTML(descriptionStr.Groups[1].Value);
+                Debug.WriteLine(description);
             }
 
             // Find the movie release year
@@ -405,6 +407,34 @@ namespace watched_it
             return new Movie(name, description, releaseYear, -1, imdbRating, filepath, picFilepath, false);
         }
 
+        // Remove any HTML string that may be in the description of a movie, when a link is
+        // in the movie description
+        private string removeLinkHTML(string description)
+        {
+            bool foundLink = false;
+            string newDescription = "";
+
+            for (int i = 0; i < description.Length; i++)
+            {
+                if (description[i] == '<')
+                {
+                    foundLink = true;
+                }
+                else if (description[i] == '>')
+                {
+                    foundLink = false;
+                }
+
+                if(!(foundLink) && !(description[i] == '>'))
+                {
+                    newDescription += description[i];
+                }
+            }
+
+            return newDescription;
+        }
+
+        // Remove all special characters that may appear in the IMDB title of a movie
         private string validFileStr(string name)
         {
             name = name.Replace("\\", "");
@@ -514,14 +544,6 @@ namespace watched_it
                     MovieList.SelectedItems[0].SubItems[0].Text,
                     Int32.Parse(MovieList.SelectedItems[0].SubItems[1].Text));
 
-                movieDetailsNameAndYear.Font = new Font(movieDetailsNameAndYear.Font, FontStyle.Bold);
-                movieDetailsPosterImg.Show();
-                movieDetailsNameAndYear.Show();
-                movieDetailsDescription.Show();
-                movieDetailsIMDBRating.Show();
-                movieDetailsUserRating.Show();
-                movieDetailsWatched.Show();
-
                 movieDetailsPosterImg.Image = Image.FromFile(currentMovie.getPicFilepath());
                 movieDetailsNameAndYear.Text = currentMovie.getName() + " (" + currentMovie.getReleaseYear() + ")";
                 movieDetailsDescription.Text = currentMovie.getDescription();
@@ -535,7 +557,21 @@ namespace watched_it
                     movieDetailsUserRating.Text = "User Rating: N/A";
                 }
                 movieDetailsWatched.Text = "Watched: " + currentMovie.getWatched();
+
+                movieDetailsNameAndYear.Font = new Font(movieDetailsNameAndYear.Font, FontStyle.Bold);
+                movieDetailsPosterImg.Show();
+                movieDetailsNameAndYear.Show();
+                movieDetailsDescription.Show();
+                movieDetailsIMDBRating.Show();
+                movieDetailsUserRating.Show();
+                movieDetailsWatched.Show();
             }
+        }
+
+        // Close button in File tab
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
         }
     }
 }

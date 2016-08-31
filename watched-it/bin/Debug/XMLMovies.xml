@@ -1,0 +1,83 @@
+<?xml version="1.0" standalone="yes"?>
+<MovieDB xmlns="http://tempuri.org/MovieDB.xsd">
+  <Movies>
+    <MovieName>(500) Days of Summer</MovieName>
+    <ReleaseYear>2009</ReleaseYear>
+    <UserRating>-1</UserRating>
+    <IMDBRating>7.7</IMDBRating>
+    <Path>E:\Test\(500) Days of Summer [2009]\(500) Days of Summer [2009].mkv</Path>
+    <Watched>false</Watched>
+    <PicturePath>C:\Users\Mark\Desktop\Projects\watched-it\watched-it\bin\Debug\..\..\..\imgs\img_not_found.png</PicturePath>
+    <Description>An offbeat romantic comedy about a woman who doesn't believe true love exists, and the young man who falls for her.</Description>
+  </Movies>
+  <Movies>
+    <MovieName>Adaptation.</MovieName>
+    <ReleaseYear>2002</ReleaseYear>
+    <UserRating>-1</UserRating>
+    <IMDBRating>7.7</IMDBRating>
+    <Path>E:\Test\Adaptation [2002]\Adaptation [2002].mp4</Path>
+    <Watched>false</Watched>
+    <PicturePath>C:\Users\Mark\Desktop\Projects\watched-it\watched-it\bin\Debug\poster_imgs/Adaptation Poster.jpg</PicturePath>
+    <Description>A lovelorn screenwriter becomes desperate as he tries and fails to adapt 'The Orchid Thief' by Susan Orlean for the screen.</Description>
+  </Movies>
+  <Movies>
+    <MovieName>Crank</MovieName>
+    <ReleaseYear>2006</ReleaseYear>
+    <UserRating>-1</UserRating>
+    <IMDBRating>7</IMDBRating>
+    <Path>E:\Test\Crank [2006]\Crank [2006].mp4</Path>
+    <Watched>false</Watched>
+    <PicturePath>C:\Users\Mark\Desktop\Projects\watched-it\watched-it\bin\Debug\poster_imgs/Crank Poster.jpg</PicturePath>
+    <Description>Professional assassin Chev Chelios learns his rival has injected him with a poison that will kill him if his heart rate drops.</Description>
+  </Movies>
+  <Movies>
+    <MovieName>Dredd</MovieName>
+    <ReleaseYear>2012</ReleaseYear>
+    <UserRating>-1</UserRating>
+    <IMDBRating>7.1</IMDBRating>
+    <Path>E:\Test\Dredd [2012]\Dredd [2012].mkv</Path>
+    <Watched>false</Watched>
+    <PicturePath>C:\Users\Mark\Desktop\Projects\watched-it\watched-it\bin\Debug\poster_imgs/Dredd Poster.jpg</PicturePath>
+    <Description>In a violent, futuristic city where the police have the authority to act as judge, jury and executioner, a cop teams with a trainee to take down a gang that deals the reality-altering drug, SLO-MO.</Description>
+  </Movies>
+  <Movies>
+    <MovieName>Fantastic Mr. Fox</MovieName>
+    <ReleaseYear>2009</ReleaseYear>
+    <UserRating>-1</UserRating>
+    <IMDBRating>7.8</IMDBRating>
+    <Path>E:\Test\Fantastic Mr Fox [2009]\Fantastic Mr Fox [2009].mp4</Path>
+    <Watched>false</Watched>
+    <PicturePath>C:\Users\Mark\Desktop\Projects\watched-it\watched-it\bin\Debug\poster_imgs/Fantastic Mr Fox Poster.jpg</PicturePath>
+    <Description>An urbane fox cannot resist returning to his farm raiding ways and then must help his community survive the farmers' retaliation.</Description>
+  </Movies>
+  <Movies>
+    <MovieName>Finding Forrester</MovieName>
+    <ReleaseYear>2000</ReleaseYear>
+    <UserRating>-1</UserRating>
+    <IMDBRating>7.3</IMDBRating>
+    <Path>E:\Test\Finding Forrester [2000]\Finding Forrester [2000].mkv</Path>
+    <Watched>false</Watched>
+    <PicturePath>C:\Users\Mark\Desktop\Projects\watched-it\watched-it\bin\Debug\poster_imgs/Finding Forrester Poster.jpg</PicturePath>
+    <Description>A young writing prodigy finds a mentor in a reclusive author.</Description>
+  </Movies>
+  <Movies>
+    <MovieName>I Am Number Four</MovieName>
+    <ReleaseYear>2011</ReleaseYear>
+    <UserRating>-1</UserRating>
+    <IMDBRating>6.1</IMDBRating>
+    <Path>E:\Test\I Am Number Four [2011]\I Am Number Four [2011].mp4</Path>
+    <Watched>false</Watched>
+    <PicturePath>C:\Users\Mark\Desktop\Projects\watched-it\watched-it\bin\Debug\poster_imgs/I Am Number Four Poster.jpg</PicturePath>
+    <Description>Aliens and their Guardians are hiding on Earth from intergalactic bounty hunters. They can only be killed in numerical order, and Number Four is next on the list. This is his story.</Description>
+  </Movies>
+  <Movies>
+    <MovieName>In Bruges</MovieName>
+    <ReleaseYear>2008</ReleaseYear>
+    <UserRating>-1</UserRating>
+    <IMDBRating>8</IMDBRating>
+    <Path>E:\Test\In Bruges [2008]\In Bruges [2008].mp4</Path>
+    <Watched>false</Watched>
+    <PicturePath>C:\Users\Mark\Desktop\Projects\watched-it\watched-it\bin\Debug\poster_imgs/In Bruges Poster.jpg</PicturePath>
+    <Description>Guilt-stricken after a job gone wrong, hitman Ray and his partner await orders from their ruthless boss in Bruges, Belgium, the last place in the world Ray wants to be.</Description>
+  </Movies>
+</MovieDB>

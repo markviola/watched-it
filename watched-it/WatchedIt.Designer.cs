@@ -66,12 +66,12 @@
             this.button3 = new System.Windows.Forms.Button();
             this.ResetSearchButton = new System.Windows.Forms.Button();
             this.movieDetailsPanel = new System.Windows.Forms.Panel();
+            this.movieDetailsDescription = new System.Windows.Forms.Label();
             this.movieDetailsWatched = new System.Windows.Forms.Label();
             this.movieDetailsUserRating = new System.Windows.Forms.Label();
             this.movieDetailsIMDBRating = new System.Windows.Forms.Label();
             this.movieDetailsNameAndYear = new System.Windows.Forms.Label();
             this.movieDetailsPosterImg = new System.Windows.Forms.PictureBox();
-            this.movieDetailsDescription = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.movieDetailsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.movieDetailsPosterImg)).BeginInit();
@@ -105,20 +105,21 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.closeToolStripMenuItem.Text = "Close";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // toolStripDropDownButton2
             // 
@@ -135,7 +136,7 @@
             // 
             this.gridToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("gridToolStripMenuItem.Image")));
             this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
-            this.gridToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.gridToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.gridToolStripMenuItem.Text = "Grid";
             this.gridToolStripMenuItem.Click += new System.EventHandler(this.gridToolStripMenuItem_Click);
             // 
@@ -143,7 +144,7 @@
             // 
             this.textListToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("textListToolStripMenuItem.Image")));
             this.textListToolStripMenuItem.Name = "textListToolStripMenuItem";
-            this.textListToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.textListToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.textListToolStripMenuItem.Text = "Text List";
             this.textListToolStripMenuItem.Click += new System.EventHandler(this.textListToolStripMenuItem_Click);
             // 
@@ -391,6 +392,15 @@
             this.movieDetailsPanel.Size = new System.Drawing.Size(242, 544);
             this.movieDetailsPanel.TabIndex = 10;
             // 
+            // movieDetailsDescription
+            // 
+            this.movieDetailsDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.movieDetailsDescription.Location = new System.Drawing.Point(14, 370);
+            this.movieDetailsDescription.Name = "movieDetailsDescription";
+            this.movieDetailsDescription.Size = new System.Drawing.Size(209, 89);
+            this.movieDetailsDescription.TabIndex = 5;
+            this.movieDetailsDescription.Text = "Description";
+            // 
             // movieDetailsWatched
             // 
             this.movieDetailsWatched.AutoSize = true;
@@ -439,15 +449,6 @@
             this.movieDetailsPosterImg.Size = new System.Drawing.Size(174, 259);
             this.movieDetailsPosterImg.TabIndex = 0;
             this.movieDetailsPosterImg.TabStop = false;
-            // 
-            // movieDetailsDescription
-            // 
-            this.movieDetailsDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.movieDetailsDescription.Location = new System.Drawing.Point(14, 370);
-            this.movieDetailsDescription.Name = "movieDetailsDescription";
-            this.movieDetailsDescription.Size = new System.Drawing.Size(209, 89);
-            this.movieDetailsDescription.TabIndex = 5;
-            this.movieDetailsDescription.Text = "Description";
             // 
             // WatchedIt
             // 
